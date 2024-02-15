@@ -17,5 +17,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 	<img width="50" src="https://user-images.githubusercontent.com/25181517/121405754-b4f48f80-c95d-11eb-8893-fc325bde617f.png" alt=".NET Core" title=".NET Core"/>
 </div>
 
+[![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,css,flutter,html,mysql,postgres,sqlite,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse)](https://skillicons.dev)
+
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
