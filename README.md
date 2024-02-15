@@ -9,6 +9,6 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 - 📫 How to reach me: taushif1teza@gmail.com
 
 #### Languages and Tools:
-[![My Skills](https://skills.thijs.gg/icons?i=cs,py,java,Django,js,html,css,mysql,postgres,docker,git)](https://skills.thijs.gg)
+[![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,css,flutter,html,mysql,postgres,sqlite,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse)]
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
