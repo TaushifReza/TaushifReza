@@ -4,8 +4,8 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ![](https://komarev.com/ghpvc/?username=TaushifReza&style=flat-square&color=brightgreen&base=2000)
 
-- 🔭 I’m currently working on with ASP.NET Core Web API
-- 🌱 I’m currently learning ASP.NET Core Web API
+- 🔭 I’m currently working on with **ASP.NET Core Web API**
+- 🌱 I’m currently learning **ASP.NET Core Web API**
 - 📫 How to reach me: taushif1teza@gmail.com
 
 #### Languages and Tools:
