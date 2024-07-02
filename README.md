@@ -22,6 +22,8 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
+## <img src="https://media.giphy.com/media/ZCN6F3FAkwsyOGU2RS/giphy.gif" width="40"> **Github Stats:**
+
 📊 <b>Github Stats</b><br/>
 
 <p align="center">
