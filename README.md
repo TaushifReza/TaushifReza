@@ -10,7 +10,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
   - 📫 How to reach me: taushif1teza@gmail.com
 </span>
 <span style="display: inline-block; margin-left: 20px;">
-  <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="40" height="30">
+  <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="200" height="300">
 </span>
 
 #### Languages and Tools:
