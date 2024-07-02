@@ -12,7 +12,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
-📊 <b>Github Readme Stats</b><br/>
+📊 <b>Github Stats</b><br/>
 
 <table style="border: none; border-collapse: collapse;">
   <tr style="border: none;">
