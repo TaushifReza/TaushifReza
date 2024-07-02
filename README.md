@@ -25,11 +25,11 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 📊 <b>Github Stats</b><br/>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Anurag's GitHub stats">
+  <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Taushif GitHub stats">
 </p>
 
 🏆 <b>Github Profile Trophy</b><br/>
 
 <p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="TaushifReza" /></a>
+  <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="Taushif Profile Trophy" /></a>
 </p>
