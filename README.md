@@ -4,14 +4,16 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ![](https://komarev.com/ghpvc/?username=TaushifReza&style=flat-square&color=brightgreen&base=2000)
 
-<span style="display: inline-block; vertical-align: top;">
-  - 🔭 I’m currently working on with **Coding Skill**<br>
-  - 🌱 I’m currently learning **Competitive programming and DSA.**<br>
-  - 📫 How to reach me: taushif1teza@gmail.com
-</span>
-<span style="display: inline-block; margin-left: 20px;">
-  <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="200" height="300">
-</span>
+<div style="display: flex; align-items: center;">
+  <div style="flex: 1;">
+    - 🔭 I’m currently working on with **Coding Skill**<br>
+    - 🌱 I’m currently learning **Competitive programming and DSA.**<br>
+    - 📫 How to reach me: taushif1teza@gmail.com
+  </div>
+  <div style="flex: 1;">
+    <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="40" height="30">
+  </div>
+</div>
 
 #### Languages and Tools:
 
