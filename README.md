@@ -12,6 +12,8 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
+<summary>📊 <b>Github Readme Stats</b></summary>
+
 <table style="border: none; border-collapse: collapse;">
   <tr style="border: none;">
     <td style="border: none;">
@@ -24,6 +26,8 @@ troubleshoot. Able to work independently of remote locations or in office enviro
     </td>
   </tr>
 </table>
+
+<summary>🏆 <b>Github Profile Trophy</b></summary>
 
 <p align="center">
   <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="TaushifReza" /></a>
