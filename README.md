@@ -12,12 +12,12 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
-<table>
-  <tr>
-    <td>
+<table style="border: none;">
+  <tr style="border: none;">
+    <td style="border: none;">
       <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Anurag's GitHub stats">
     </td>
-    <td>
+    <td style="border: none;">
       <a href="https://git.io/streak-stats">
         <img src="https://github-readme-streak-stats.herokuapp.com?user=TaushifReza&theme=nightowl" alt="GitHub Streak">
       </a>
