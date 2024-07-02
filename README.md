@@ -12,7 +12,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
       - 📫 How to reach me: taushif1teza@gmail.com
     </td>
     <td style="vertical-align: top;">
-      <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="200" height="150">
+      <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="200" height="100">
     </td>
   </tr>
 </table>
