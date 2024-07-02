@@ -12,9 +12,18 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
-
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=TaushifReza&theme=nightowl)](https://git.io/streak-stats)
+<table>
+  <tr>
+    <td>
+      <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Anurag's GitHub stats">
+    </td>
+    <td>
+      <a href="https://git.io/streak-stats">
+        <img src="https://github-readme-streak-stats.herokuapp.com?user=TaushifReza&theme=nightowl" alt="GitHub Streak">
+      </a>
+    </td>
+  </tr>
+</table>
 
 <p align="center">
   <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="TaushifReza" /></a>
