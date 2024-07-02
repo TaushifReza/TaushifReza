@@ -8,7 +8,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 - 🌱 I’m currently learning **Competitive programming and DSA.**
 - 📫 How to reach me: taushif1teza@gmail.com
 
-<img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="400" height="300">
+<img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="40" height="30">
 
 #### Languages and Tools:
 
