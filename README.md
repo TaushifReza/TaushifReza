@@ -13,3 +13,5 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=TaushifReza)](https://github.com/ryo-ma/github-profile-trophy)
