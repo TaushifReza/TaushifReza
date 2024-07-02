@@ -10,7 +10,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 - 🔭 I’m currently working on **Coding Skills.**
 - 🌱 I’m currently learning **Competitive programming and DSA.**
-- 👯 I’m looking to collaborate on **Java and Web Projects.**
+- 👯 I’m looking to collaborate on **C# and Web Projects.**
 - 👨‍💻 All of my projects are available at <a href="https://github.com/TaushifReza?tab=repositories" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="TaushifReza" height="30" width="40" /></a>
 - 💬 Ask me about **C#, ASP.NET Core, Python, Django**
 
@@ -24,18 +24,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 📊 <b>Github Stats</b><br/>
 
-<table style="border: none; border-collapse: collapse;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Anurag's GitHub stats">
-    </td>
-    <td style="border: none;">
-      <a href="https://git.io/streak-stats">
-        <img src="https://github-readme-streak-stats.herokuapp.com?user=TaushifReza&theme=nightowl" alt="GitHub Streak">
-      </a>
-    </td>
-  </tr>
-</table>
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
 
 🏆 <b>Github Profile Trophy</b><br/>
 
