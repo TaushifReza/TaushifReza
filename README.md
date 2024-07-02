@@ -10,6 +10,6 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 #### Languages and Tools:
 
-[![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,css,flutter,html,mysql,postgres,sqlite,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,css,flutter,html,mysql,postgres,sqlite,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis,react)](https://skillicons.dev)
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
