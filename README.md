@@ -4,11 +4,21 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ![](https://komarev.com/ghpvc/?username=TaushifReza&style=flat-square&color=brightgreen&base=2000)
 
-- 🔭 I’m currently working on with **Coding Skill**<br>
-- 🌱 I’m currently learning **Competitive programming and DSA.**<br>
-- 📫 How to reach me: taushif1teza@gmail.com
+<img align="right" alt="coding" width="300" src="https://media.giphy.com/media/lP8xu5t2DLGG045H8F/giphy.gif">
 
-## <img src="https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif" alt="GIF Description" width="200" height="100">
+## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="40"> **About Me:**
+
+- 🔭 I’m currently working on **Coding Skills.**
+- 🌱 I’m currently learning **Competitive programming and DSA.**
+- 👯 I’m looking to collaborate on **Java and Web Projects.**
+- 👨‍💻 All of my projects are available at <a href="https://github.com/abhinandanraj?tab=repositories" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="abhinandanraj" height="30" width="40" /></a>
+- 💬 Ask me about **Java, HTML and CSS.**
+
+<p align="center">
+   <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=abhinandanraj&theme=radical&hide_border=true"/>
+</p>
+
+## <img src="https://media.giphy.com/media/j2pOGeGYKe2xCCKwfi/giphy.gif" width="40"> **Languages & Tools:**
 
 #### Languages and Tools:
 
