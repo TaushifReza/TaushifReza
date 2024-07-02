@@ -14,5 +14,5 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true)
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&column=5
+[![trophy](https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5
 )](https://github.com/ryo-ma/github-profile-trophy)
