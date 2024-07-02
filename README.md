@@ -8,6 +8,8 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 - 🌱 I’m currently learning **Competitive programming and DSA.**
 - 📫 How to reach me: taushif1teza@gmail.com
 
+<img src="[https://media.giphy.com/media/j2pOGeGYKe2xCCKwfi/giphy.gif](https://dl.openseauserdata.com/cache/originImage/files/527a9783c28c70962773a73db797ea4d.gif)" width="40">
+
 #### Languages and Tools:
 
 [![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,postman,vscode,visualstudio,eclipse,redis)](https://skillicons.dev)
