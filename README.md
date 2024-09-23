@@ -1,6 +1,6 @@
 # Hi 👋, there
 I'm Taushif from Nepal, and Passionate Software Engineer in developing web applications and backend systems. Skilled at writing clear, concise code that is easy to maintain and
-troubleshoot. Able to work independently of remote locations or in office environments as needed by the company. 
+troubleshoot. Able to work independently of remote locations or in office environments as needed by the company.  
 
 ![](https://komarev.com/ghpvc/?username=TaushifReza&style=flat-square&color=brightgreen&base=2000)
 
