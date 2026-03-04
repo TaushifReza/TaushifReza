@@ -8,19 +8,28 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="40"> **About Me:**
 
-- 🔭 I’m currently working on **Coding Skills.**
-- 🌱 I’m currently learning **Competitive programming and DSA.**
-- 👯 I’m looking to collaborate on **C# and Backend.**
+- 🔭 **Currently focused on:** Advanced Backend Architectures & Microservices.
+- 🌱 **Learning:** Go Programming, Competitive Programming, and DSA.
+- 👯 **Collaborations:** Open for C#, Go, and Backend-heavy projects.
 - 👨‍💻 All of my projects are available at <a href="https://github.com/TaushifReza?tab=repositories" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="TaushifReza" height="30" width="40" /></a>
-- 💬 Ask me about **C#, ASP.NET Core, Python, Django**
+- 💬 **Ask me about:** `Python/Django`, `ASP.NET Core`, `Flutter`, `Docker`, and `Nginx`.
 
 <p align="center">
    <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=TaushifReza&theme=nightowl&hide_border=true"/>
 </p>
 
-## <img src="https://media.giphy.com/media/j2pOGeGYKe2xCCKwfi/giphy.gif" width="40"> **Languages & Tools:**
+---
 
-[![My Skills](https://skillicons.dev/icons?i=cs,py,java,js,dotnet,dart,django,react,css,flutter,html,mysql,postgres,sqlite,tailwind,bootstrap,docker,git,github,gitlab,postman,vscode,visualstudio,eclipse,redis,cloudflare,nginx,ubuntu)](https://skillicons.dev)
+### 🛠️ Tech Stack
+
+| Category | Tools & Languages |
+| :--- | :--- |
+| **Languages** | ![](https://skillicons.dev/icons?i=py,go,cs,js,java,dart,html,css) |
+| **Frameworks** | ![](https://skillicons.dev/icons?i=django,react,dotnet,flutter,tailwind,bootstrap) |
+| **Databases** | ![](https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis) |
+| **DevOps & Tools** | ![](https://skillicons.dev/icons?i=docker,nginx,cloudflare,ubuntu,git,postman,vscode) |
+
+---
 
 ## <img src="https://media.giphy.com/media/ZCN6F3FAkwsyOGU2RS/giphy.gif" width="40"> **Github Stats:**
 
@@ -31,7 +40,11 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 🏆 **Github Profile Trophy**
 <p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="Taushif Profile Trophy" />
-  </a>
+  <img src="https://github.com/TaushifReza/TaushifReza/blob/master/trophy.svg" alt="Taushif Profile Trophy" />
+</p>
+
+### ⚡ Find Me Elsewhere
+<p align="left">
+<a href="https://github.com/TaushifReza" target="blank"><img align="center" src="https://skillicons.dev/icons?i=github" alt="TaushifReza" height="30" width="40" /></a>
+<a href="https://www.linkedin.com/in/taushif-reza" target="blank"><img align="center" src="https://skillicons.dev/icons?i=linkedin" alt="TaushifReza" height="30" width="40" /></a>
 </p>
