@@ -9,11 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      # This step ensures there isn't a folder named trophy.svg blocking the file
+      - name: Cleanup existing paths
+        run: rm -rf trophy.svg
+        
       - uses: ryo-ma/github-profile-trophy@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           username: TaushifReza
           theme: onedark
+          # Explicitly tell it to save in the root
+          output_path: ./trophy.svg
+          
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
