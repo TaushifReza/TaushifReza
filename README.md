@@ -24,14 +24,14 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 ## <img src="https://media.giphy.com/media/ZCN6F3FAkwsyOGU2RS/giphy.gif" width="40"> **Github Stats:**
 
-📊 <b>Github Stats</b><br/>
-
+📊 **Github Stats**
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Taushif GitHub stats">
+  <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true&count_private=true" alt="Taushif GitHub stats">
 </p>
 
-🏆 <b>Github Profile Trophy</b><br/>
-
+🏆 **Github Profile Trophy**
 <p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="Taushif Profile Trophy" /></a>
+  <a href="https://github.com/ryo-ma/github-profile-trophy">
+    <img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&margin-w=15" alt="Taushif Profile Trophy" />
+  </a>
 </p>
