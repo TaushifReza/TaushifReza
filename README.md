@@ -26,12 +26,12 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 📊 **Github Stats**
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true&count_private=true" alt="Taushif GitHub stats">
+  <img src="https://github-readme-stats-eight-theta.vercel.app/api?username=TaushifReza&theme=nightowl&show_icons=true" alt="Taushif GitHub stats">
 </p>
 
 🏆 **Github Profile Trophy**
 <p align="center">
   <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&margin-w=15" alt="Taushif Profile Trophy" />
+    <img src="https://github-profile-trophy.vercel.app/?username=TaushifReza&theme=onedark&row=1&column=5" alt="Taushif Profile Trophy" />
   </a>
 </p>
