@@ -40,7 +40,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 🏆 **Github Profile Trophy**
 <p align="center">
-  <img src="https://github.com/TaushifReza/TaushifReza/blob/master/trophy.svg" alt="Taushif Profile Trophy" />
+  <img src="https://github.com/TaushifReza/TaushifReza/blob/main/trophy.svg" alt="Taushif Profile Trophy" />
 </p>
 
 ### ⚡ Find Me Elsewhere
