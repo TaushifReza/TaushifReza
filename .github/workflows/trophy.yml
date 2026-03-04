@@ -12,7 +12,7 @@ jobs:
       - uses: ryo-ma/github-profile-trophy@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # Optional: Add your themes here
+          username: TaushifReza
           theme: onedark
       - name: Commit changes
         run: |
