@@ -1,0 +1,24 @@
+name: GitHub Trophy
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs every night at midnight
+  workflow_dispatch:   # Allows you to run it manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ryo-ma/github-profile-trophy@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: Add your themes here
+          theme: onedark
+          column: 5
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update Trophies" || exit 0
+          git push
