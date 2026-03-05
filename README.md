@@ -16,7 +16,7 @@ troubleshoot. Able to work independently of remote locations or in office enviro
 
 - 🔭 **Currently focused on:** Advanced Backend Architectures & Microservices.
 - 🌱 **Learning:** Go Programming, Competitive Programming, and DSA.
-- 👯 **Collaborations:** Open for C#, Go, python, and Backend-heavy projects.
+- 👯 **Collaborations:** Open for `C#`, `Go`, `Python`, and `Backend-heavy` projects.
 - 👨‍💻 All of my projects are available at <a href="https://github.com/TaushifReza?tab=repositories" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="TaushifReza" height="30" width="40" /></a>
 - 💬 **Ask me about:** `Python/Django`, `ASP.NET Core`, `Go`, `Docker`, and `Nginx`.
 
