@@ -1,6 +1,6 @@
 <div align="center" style="background-color:#0D1117;border-radius:11px;">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=1000&color=00FF41&background=0D1117&center=true&vCenter=true&width=600&lines=+%24+whoami;%3E+Taushif+Reza+%E2%80%94+Software+Engineer;%3E+Based+in+Nepal+%F0%9F%87%B3%F0%9F%87%B5;%3E+Backend+Architectures+%7C+Microservices+%7C+Go;%3E+Open+for+work+%26+collaborations...;%3E+_)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=1000&color=00FF41&background=0D1117&center=true&vCenter=true&width=600&lines=+%24+whoami;%3E+Taushif+Reza+%E2%80%94+Software+Engineer;%3E+Based+in+Nepal+%F0%9F%87%B3%F0%9F%87%B5;%3E+Backend+Architectures+%7C+Microservices+%7C+DevOps;%3E+Open+for+work+%26+collaborations...;%3E+_)](https://git.io/typing-svg)
 
 </div>
 
