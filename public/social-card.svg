@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Taushif Reza — Software Engineer</title>
+  <desc id="description">An editorial portfolio card: reliable systems, thoughtfully built. APIs, real-time systems, and connected hardware.</desc>
+  <rect width="1200" height="630" fill="#f7f5f0"/>
+  <path d="M72 70h1056M72 558h1056" stroke="#d8d3df" stroke-width="2"/>
+  <text x="74" y="118" fill="#65517f" font-family="monospace" font-size="18" letter-spacing="4">SOFTWARE ENGINEER</text>
+  <text x="68" y="246" fill="#29243b" font-family="Arial, sans-serif" font-weight="700" font-size="88" letter-spacing="-4">Taushif Reza</text>
+  <text x="74" y="322" fill="#29243b" font-family="Arial, sans-serif" font-size="36">Reliable systems, thoughtfully built.</text>
+  <text x="74" y="492" fill="#625c6d" font-family="Arial, sans-serif" font-size="23">APIs · Real-time systems · Connected hardware</text>
+  <g fill="none" stroke="#8060b0" stroke-width="2">
+    <rect x="912" y="177" width="184" height="68" rx="12"/>
+    <rect x="912" y="285" width="184" height="68" rx="12"/>
+    <rect x="912" y="393" width="184" height="68" rx="12"/>
+    <path d="M1004 245v40m0 68v40"/>
+  </g>
+  <g fill="#65517f" font-family="monospace" font-size="18" text-anchor="middle">
+    <text x="1004" y="218">REQUEST</text>
+    <text x="1004" y="326">REASON</text>
+    <text x="1004" y="434">RESPOND</text>
+  </g>
+  <circle cx="1118" cy="112" r="7" fill="#8060b0"/>
+</svg>

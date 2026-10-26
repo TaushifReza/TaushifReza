@@ -2,3 +2,12 @@
 claude_context.md
 gemini_context.md
 gpt_context.md
+
+node_modules/
+dist/
+test-results/
+playwright-report/
+tests/results/
+tests/report/
+*.tsbuildinfo
+.DS_Store
