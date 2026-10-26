@@ -2,7 +2,7 @@
 
 ## Scope
 
-Extend the responsive React portfolio with dedicated engineering articles, a compact verified repository archive, optional real project artifacts, and a newly built pretrained-model lab. Preserve the homepage identity, existing project IDs/disclosures, README, trophy asset, and repository metadata. Do not deploy.
+Extend the responsive React portfolio with dedicated engineering articles, a compact verified repository archive, optional real project artifacts, and a newly built pretrained-model lab. Preserve the homepage identity, existing project IDs/disclosures, README, trophy asset, and repository metadata. Application work is followed by the approved GitHub Pages deployment setup described below.
 
 ## Technical choices
 
@@ -14,7 +14,7 @@ Extend the responsive React portfolio with dedicated engineering articles, a com
 - Inline SVG diagrams with accessible labels and equivalent nearby explanatory text.
 - Native JWT scenario/step controls operate on fixed synthetic fixtures; execute no cryptography. Mobile diagram alternatives preserve readable labels.
 - New browser lab uses an explicitly loaded, pinned pretrained model in a worker; keep its runtime out of the initial homepage path. Record model license/provenance and honest evaluation in `ai-lab.md`.
-- Produce the application source and build configuration only. Do not deploy or commit a generated portable `dist` directory.
+- Keep generated `dist` untracked. Publish only the audited build output through the approved GitHub Pages workflow; never serve or upload the repository root.
 
 ## Implementation sequence
 
@@ -51,9 +51,17 @@ Development and build commands: `npm run dev`, `npm run typecheck`, `npm run lin
 - Verify local assets load without console errors, initial pages make no remote requests, and only explicit lab loading accesses approved model sources. No analytics.
 - Test direct entry pages, nested hosting, back navigation, JWT scenarios/reset, and lab lifecycle states. Verify source-backed public links and no-JavaScript guidance.
 - Run lint, typecheck, production build, Playwright, and axe accessibility checks.
-- Confirm README, trophy SVG, and `.github` files remain intact.
+- Preserve README, trophy SVG, and the existing trophy workflow; add the Pages workflow separately.
 
 ## Out of scope
 
-Deployment, email/contact forms, résumé downloads, analytics, backend services, router-based navigation, and generated distribution artifacts.
+Email/contact forms, résumé downloads, analytics, backend services, router-based navigation, Docker/GHCR infrastructure, and committing generated distribution artifacts.
 
+
+## Approved GitHub Pages deployment
+
+- Target `https://taushifreza.com.np/`, with Cloudflare DNS-only web records and `www` redirecting to the apex. Existing apex DNS and HTTPS already respond; confirm current authenticated settings before changing them.
+- Add a separate Node.js 24 workflow: pull requests run checks; successful `main` pushes or manual `main` runs publish only audited `dist/`. Build with `--base=/`, run lint/typecheck/build/audit and the full Playwright suite, and grant Pages/OIDC write permissions only to the deployment job.
+- Add exact production canonical/OG URLs for all four static documents and absolute social-image metadata. Test these values while fetching image assets from the local test server, without live-domain dependencies.
+- Verify domain ownership at GitHub account level, retain its TXT record, configure repository Pages source/domain, then confirm the four official apex A records and add `www CNAME taushifreza.github.io`. Preserve unrelated DNS records, inspect web/CAA conflicts, and enable Enforce HTTPS after certificate provisioning. A repository `CNAME` file is unnecessary for Actions publishing.
+- Record actual verification results after checks. Account settings and publication require authenticated access; configuration changes alone do not establish deployment. Follow [deployment instructions](deployment.md) for setup, live smoke checks, and rollback.

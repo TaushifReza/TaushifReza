@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
 
 const pages = [
   { path: 'writing/pdf-memory/', id: 'pdf-memory', heading: 'Smaller lifetimes. A more manageable PDF pipeline.' },
@@ -13,6 +13,19 @@ const publicLinks = new Set([
   'https://www.rfc-editor.org/rfc/rfc8725',
   'https://huggingface.co/cross-encoder/nli-deberta-v3-xsmall',
 ]);
+
+async function expectProductionMetadata(page: Page, request: APIRequestContext, baseURL: string, path: string) {
+  const canonical = `https://taushifreza.com.np/${path}`;
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', canonical);
+  for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+    await expect(page.locator(selector)).toHaveAttribute('content', 'https://taushifreza.com.np/social-card.png');
+  }
+  // Production metadata must not make verification depend on a deployed site.
+  expect((await request.get(new URL('./social-card.png', baseURL).href)).status()).toBe(200);
+  const favicon = await page.locator('link[rel="icon"]').getAttribute('href');
+  expect((await request.get(new URL(favicon!, page.url()).href)).status()).toBe(200);
+}
 
 async function noOverflow(page: Page) {
   expect(await page.evaluate(() => Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
@@ -39,13 +52,8 @@ for (const entry of pages) {
       await expect(page.locator('html')).toHaveAttribute('data-page', entry.id);
       await expect(page.getByRole('main')).toHaveCount(1);
       await expect(page.locator('#work')).toHaveCount(0);
-      await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /\S.{50}/);
-      for (const selector of ['link[rel="icon"]', 'meta[property="og:image"]', 'meta[name="twitter:image"]']) {
-        const element = page.locator(selector);
-        const asset = await element.getAttribute(selector.startsWith('link') ? 'href' : 'content');
-        expect((await request.get(new URL(asset!, page.url()).href)).status()).toBe(200);
-      }
+      await expectProductionMetadata(page, request, baseURL!, entry.path);
       await page.reload();
       await expect(page.getByRole('heading', { level: 1, name: entry.heading })).toBeVisible();
       const links = await page.locator('a[href]').evaluateAll(elements => elements.map(element => ({ href: element.getAttribute('href')!, target: element.getAttribute('target'), rel: element.getAttribute('rel') ?? '' })));
@@ -143,9 +151,12 @@ test('new pages support keyboard skip navigation', async ({ page }) => {
   }
 });
 
-test('homepage supports explicit index.html, refresh, and writing navigation', async ({ page }) => {
-  await page.goto('./index.html');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Good systems.');
+test('homepage supports directory and index.html metadata, refresh, and writing navigation', async ({ page, request, baseURL }) => {
+  for (const suffix of ['', 'index.html']) {
+    await page.goto(`./${suffix}`);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Good systems.');
+    await expectProductionMetadata(page, request, baseURL!, '');
+  }
   await page.reload();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Good systems.');
   await page.locator('#writing a[href$="/writing/pdf-memory/"]').click();
