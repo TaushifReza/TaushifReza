@@ -10,14 +10,18 @@ This document is the content source of truth for the portfolio. Public copy shou
 
 The AI direction is an aspiration, not a claim of AI/ML specialization. Use “Software Engineer” rather than senior, architect, or another unsupported level.
 
+The owner approved the supplied transparent `public/bg_remove.png` cutout as the sole public portrait, replacing the introduction's large orbit illustration. Use the original PNG without further image editing, with the name Taushif Reza and role Software Engineer. The Approach section retains its text identity and biography without a second photo. The original `pp.jpg`, `half_body.jpg`, other supplied photos, and download sidecars remain local and unpublished.
+
 ## Public sections
 
 1. **Introduction:** Name, role, concise positioning, and GitHub/LinkedIn links.
 2. **Selected work:** Bus Attendance System, Dynamic QR Ticketing System, inTalent, and Go PDF generator. Each entry distinguishes project context, contribution, evidence, and status where relevant.
-3. **How I work:** Transactional correctness, clear service boundaries, access control, and root-cause debugging. Frame these as recurring engineering interests/practices, not quantified outcomes.
-4. **Experience and education:** Current CV-confirmed roles and degree.
-5. **Expertise:** Evidence-based technologies only; avoid proficiency scales.
-6. **Contact:** Public GitHub and LinkedIn links only.
+3. **Writing:** Dedicated PDF memory case study and JWT/JWKS educational article. A compact public-repository archive follows selected work.
+4. **Lab:** Newly built incident-classifier portfolio experiment linked from the learning aside. This is current learning work, not a historical employment project or evidence of AI specialization.
+5. **How I work:** Transactional correctness, clear service boundaries, access control, and root-cause debugging. Frame these as recurring engineering interests/practices, not quantified outcomes.
+6. **Experience and education:** Current CV-confirmed roles and degree.
+7. **Expertise:** Evidence-based technologies only; avoid proficiency scales.
+8. **Contact:** Public GitHub and LinkedIn links only.
 
 ## Experience and education
 
@@ -44,6 +48,16 @@ Context describes a certification-based hiring and applicant-tracking platform u
 ### Go PDF generator
 
 Context describes a Go tool for large-batch ticket-imposition PDFs and two production out-of-memory failures addressed by creating an Fpdf instance per sheet and merging bounded groups recursively with pdfcpu. Safe case study: explain the memory issue and these design changes; state that the failures were reported as solved, with no public metrics available. Do not invent throughput, batch size, memory savings, or uptime.
+
+### Writing, lab, and public repository additions
+
+- `/writing/pdf-memory/`: document two production OOM failures, per-sheet Fpdf instantiation, and bounded recursive pdfcpu merging. Diagnostic chronology, exact earlier pipeline, measurements, and original code are unavailable. Resource diagrams are conceptual; pseudocode is explanatory. Do not infer profiler use or measured improvements.
+- `/writing/jwt-jwks/`: educational asymmetric-signing flow, separate from verification of any deployment. Static synthetic fixtures illustrate valid, expired, wrong-audience, and permission-denied requests. Issuance → signature verification → issuer/audience/expiration validation → authorization; failed authentication does not reach authorization. No cryptography executes. Reference RFC 7519, 7517, and 8725; distinguish decoding from verification and signing from confidentiality.
+- The newly built lab uses a pretrained NLI model for zero-shot classification, not an incident-trained or newly trained model. The reviewed upstream `cross-encoder/nli-deberta-v3-xsmall` license is Apache 2.0; the pinned ONNX artifact is `Xenova/nli-deberta-v3-xsmall`. Runtime/model versions, provenance, downloads, evaluation, and limitations belong in `ai-lab.md` and the lab UI.
+- Public source review on 26 October 2026 supports `https://github.com/TaushifReza/banking-app` as an account/authentication/profile Django REST project, including email OTP and JWT cookies. Its name does not establish a completed banking or transaction system.
+- The reviewed public `https://github.com/TaushifReza/go-social` supports registration, posts, follows, PostgreSQL, Redis profile caching, and HS256 JWTs. Do not describe it as using the article's RSA/JWKS design or as production-ready.
+- EBookStore returned 404 and is omitted. Template Studio has no supplied public artifacts and is omitted from the archive.
+- Typed optional image/video/link evidence is supported in disclosures. Add entries only for real public artifacts; no empty panels or mock screenshots. Image/video/caption files must use reviewed public-folder paths such as `artifacts/bus-dashboard.webp`, without a hosting prefix or Vite-imported absolute URL. External HTTPS is only for click-through links. Before adding a video, supply a transcript and, when it contains audio, reviewed caption tracks through the captions field; verify accessibility and loading behavior against the actual artifact.
 
 ### Additional evidence-led topics
 
@@ -85,7 +99,7 @@ Source keys: **C** = `claude_context.md`, section D numbered inventory (lines 50
 | ING Skill Museum Global Survey | C D.5 | Reserve | Django/JWT/Celery/email/token-flow context. Employer relationship, personal scope and rollout missing. Do not rename employer to Skill Museum. |
 | Template Studio | C D.6 | Reserve | Django/React template canvas and bulk generation described; individual authorship and public demo missing. |
 | cec-print | C D.7 | Reserve | Pillow certificate tool described. Authorship, status and public repository missing. Keep distinct from Go PDF tool. |
-| go-social | C D.9 | Reserve | Layered Go backend, registration/login/profile, mocks described; supplied repository text `github.com/TaushifReza/go-social` is not independently retrieved. |
+| go-social | C D.9; public repository reviewed 26 Oct 2026 | Archive | Current public source supports Go social API registration/posts/follows, PostgreSQL and Redis profile caching; HS256 JWTs. No production-readiness or RSA/JWKS claim. |
 | Go AI Interview | C D.10 | Omit | Go/Gin migration described; overlap with Go REST API/go-social and shipping status unresolved. |
 | Go REST API | C D.11 | Reserve | Go API stack described; possible overlap with D.9/D.10 explicitly uncertain. No separate ownership/rollout proof. |
 | Admission Pulse | C D.12; G `Admission Pulse` (411) | Reserve | FastAPI/async SQLAlchemy/JWT/reporting work discussed. Intended users are inferred; final debugging outcome, usage and deployment missing. |
@@ -112,8 +126,8 @@ Source keys: **C** = `claude_context.md`, section D numbered inventory (lines 50
 | Hack Arena | G `Hack Arena` (663) | Omit | Colleague work; personal contribution missing. |
 | inTalent Landing Page | G `inTalent Landing Page` (681) | Omit | Assistant-proposed artifact; user authorship and outcome unconfirmed. |
 | AI/ML learning experiments | G `AI/ML Learning Experiments` (699) | Omit as projects | Learning proposals only; completed experiments missing. AI direction may appear as aspiration. |
-| Banking APP | CV, Projects | Reserve | CV reports Django-style banking API/security/async deployment work. Scope and implementation not independently inspected; no adoption or regulated-service claim. |
-| E-Book Store | CV, Projects | Reserve | CV reports ASP.NET Core/Identity/EF, repository/UoW/N-tier, Stripe and Facebook login. Current repository state and demo missing. |
+| Banking APP | CV, Projects; public repository reviewed 26 Oct 2026 | Archive, narrow scope | Public source supports Django REST account/authentication/profile workflows, email OTP, and JWT cookies. No completed banking, transactions, adoption, or regulated-service claim. |
+| E-Book Store | CV, Projects; repository check 26 Oct 2026 | Omit | CV reports ASP.NET features, but the linked public repository returned 404. No public artifact is supplied. |
 
 ### Exact CV credentials, dates, and additional links
 
@@ -123,5 +137,5 @@ Source keys: **C** = `claude_context.md`, section D numbered inventory (lines 50
 - **AWS Academy Graduate - AWS Academy Cloud Foundations**: **Sep 19, 2022**; CV annotation URL: `https://www.credly.com/go/JFOz4SiG`.
 - **AWS Academy Graduate - AWS Academy Machine Learning Foundations**: **Nov 16, 2022**; CV annotation URL: `https://www.credly.com/go/HPWfg0vu`.
 
-The AWS entries are course completions, not professional AWS certifications; they are not required public page content. Banking APP CV annotation points to `https://github.com/TaushifReza/banking-app`; E-Book Store points to `https://github.com/TaushifReza/eBookStore`. These project/credential URLs were extracted from CV annotations; retrieval and current content are unconfirmed. Keep them out of project CTAs until reviewed. Public GitHub profile retrieval returned 200; LinkedIn returned 999 (bot/access restriction), so automated retrieval cannot establish normal interactive availability.
+The AWS entries are course completions, not professional AWS certifications; they are not required public page content. Banking APP's CV-linked `https://github.com/TaushifReza/banking-app` has now been reviewed and is included only with the narrow source-supported scope above. E-Book Store's `https://github.com/TaushifReza/eBookStore` returned 404 and is omitted. Credential URLs were extracted from CV annotations but have not been verified for public inclusion. Public GitHub profile retrieval returned 200; LinkedIn returned 999 (bot/access restriction), so automated retrieval cannot establish normal interactive availability.
 

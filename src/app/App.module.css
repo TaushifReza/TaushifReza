@@ -12,8 +12,8 @@
 .header nav a:hover { color: var(--violet); }
 .header nav .navContact { gap: 10px; margin-left: 11px; }
 .navContact svg { width: 16px; }
-.hero { position: relative; display: grid; grid-template-columns: 1.55fr 1fr; column-gap: 30px; padding-top: 72px; }
-.heroContent { position: relative; z-index: 1; }
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: 80px; padding-top: 72px; }
+.heroContent { position: relative; z-index: 1; align-self: center; min-width: 0; }
 .eyebrow { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .09em; color: var(--muted); }
 .locationDot { width: 7px; height: 7px; background: var(--violet); border-radius: 50%; }
 .eyebrowDivider { margin-inline: 5px; color: #92908b; }
@@ -26,11 +26,11 @@
 .textLink { min-height: 44px; display: inline-flex; gap: 12px; align-items: center; font-size: 12px; transition: color var(--transition); }
 .textLink:hover { color: var(--violet); }
 .textLink svg { width: 17px; }
-.heroGraphic { position: relative; align-self: center; padding-bottom: 19px; color: var(--violet); }
-.orbit { width: 100%; max-width: 420px; margin-left: auto; }
-.orbitLabel { position: absolute; right: 9px; top: 0; font: 11px/1.7 var(--mono); letter-spacing: .04em; color: var(--muted); }
-.orbitCaption { display: flex; flex-direction: column; gap: 7px; border-top: 1px solid var(--line); padding-top: 14px; margin-left: 35px; color: var(--muted); }
-.orbitCaption > span:last-child { font-family: var(--serif); font-style: italic; font-size: 13px; }
+.heroGraphic { width: 320px; align-self: center; justify-self: end; }
+.heroPortrait { display: block; width: 100%; height: auto; aspect-ratio: 419 / 595; }
+.portraitCaption { display: flex; flex-direction: column; gap: 7px; margin-top: 18px; }
+.portraitCaption strong { font-size: 20px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; }
+.portraitCaption > span { font-size: 12px; line-height: 1.7; color: var(--muted); }
 .heroFoot { grid-column: 1 / -1; margin-top: 55px; padding: 22px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--mono); color: var(--muted); font-size: 11px; }
 .heroFoot > span span { padding-inline: 12px; color: var(--violet); }
 .heroFoot a { display: flex; align-items: center; gap: 15px; min-height: 44px; }
@@ -99,6 +99,9 @@
 .approachIntro h2 em, .experienceHeading h2 em { font-family: var(--serif); font-weight: 400; }
 .aboutCopy { font-size: 14px; line-height: 1.9; color: var(--muted); padding-top: 1px; }
 .aboutCopy p + p { margin-top: 17px; }
+.aboutIdentity { margin-bottom: 24px; }
+.aboutIdentity strong { display: block; color: var(--ink); font-size: 20px; line-height: 1.4; font-weight: 500; letter-spacing: -.02em; }
+.aboutIdentity span { display: block; margin-top: 7px; font-size: 12px; }
 .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 39px; margin-top: 55px; }
 .principles article { border-top: 1px solid #cfcdc5; padding-top: 20px; }
 .principleNumber { font: 11px/1.5 var(--mono); color: var(--violet); }
@@ -161,10 +164,9 @@
 
 @media (max-width: 1100px) {
   .header nav { gap: 23px; }
-  .hero { grid-template-columns: 1.6fr 1fr; gap: 15px; }
+  .hero { grid-template-columns: minmax(0, 1fr) 240px; column-gap: 32px; }
   .hero h1 { font-size: clamp(49px, 6vw, 68px); }
-  .heroGraphic { padding-top: 20px; }
-  .orbitLabel { font-size: 11px; }
+  .heroGraphic { width: 240px; }
   .featuredProject { gap: 32px; grid-template-columns: 1fr 1fr; }
   .diagramTop { flex-wrap: wrap; gap: 8px; }
   .diagramBadge { font-size: 11px; }
@@ -192,19 +194,16 @@
   .header nav a { font-size: 11px; }
   .header nav .navContact { margin-left: 0; }
   .navContact svg { display: none; }
-  .hero { padding-top: 51px; grid-template-columns: 1fr 180px; gap: 8px; }
+  .hero { padding-top: 51px; grid-template-columns: minmax(0, 1fr); gap: 0; }
   .hero h1 { font-size: clamp(42px, 7vw, 55px); }
   .eyebrow { font-size: 11px; gap: 7px; }
   .eyebrowDivider { margin-inline: 0; }
   .introduction { font-size: 14px; margin-top: 22px; }
-  .heroGraphic { margin-right: -10px; align-self: start; margin-top: 45px; }
-  .orbitLabel { display: none; }
-  .orbitCaption { margin-left: 15px; padding-top: 10px; gap: 6px; }
-  .orbitCaption .mono { font-size: 11px; }
-  .orbitCaption > span:last-child { font-size: 11px; }
+  .heroGraphic { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; column-gap: 24px; width: 100%; justify-self: start; margin-top: 22px; }
+  .portraitCaption { margin-top: 0; }
   .heroActions { gap: 19px; margin-top: 23px; }
   .primaryButton { gap: 16px; padding: 12px 16px; font-size: 11px; }
-  .heroFoot { margin-top: 35px; gap: 15px; font-size: 11px; }
+  .heroFoot { margin-top: 25px; gap: 15px; font-size: 11px; }
   .heroFoot > span span { padding-inline: 5px; }
   .heroFoot a { gap: 6px; }
   .work { padding-top: 44px; }
@@ -286,7 +285,6 @@
   .eyebrow { font-size: 11px; }
   .hero h1 { font-size: clamp(40px, 10.45vw, 58px); margin-top: 23px; line-height: 1.12; }
   .introduction { max-width: 400px; font-size: 13px; line-height: 1.85; margin-top: 21px; }
-  .heroGraphic { display: none; }
   .heroActions { margin-top: 23px; gap: 22px; }
   .heroFoot { margin-top: 27px; padding-block: 19px; }
   .heroFoot > span { font-size: 11px; line-height: 1.8; }
@@ -336,6 +334,8 @@
   .approachIntro { gap: 24px; }
   .approachIntro h2 { font-size: clamp(31px, 8vw, 40px); }
   .aboutCopy { font-size: 12px; }
+  .aboutIdentity { margin-bottom: 22px; }
+  .aboutIdentity strong { font-size: 18px; }
   .principles { grid-template-columns: 1fr; gap: 26px; margin-top: 29px; }
   .principles article { display: grid; grid-template-columns: 27px 1fr; column-gap: 10px; padding-top: 18px; }
   .principleNumber { padding-top: 4px; }
@@ -389,7 +389,45 @@
 .expertiseGroup ul { font-size: 14px; }
 .layer strong, .layer > span:last-child { font-size: 11px; }
 .diagramTop { flex-wrap: wrap; }
+.articleLink, .labLink { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 13px; color: var(--violet); }
+.articleLink { margin-top: 16px; }
+.articleLink svg, .labLink svg { width: 16px; flex-shrink: 0; }
+.articleLink:hover, .labLink:hover { text-decoration: underline; text-underline-offset: 5px; }
+.labLink { margin-top: 10px; }
+.archive { padding-top: 32px; }
+.archiveHeading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.archiveHeading h3 { font-size: 19px; font-weight: 500; letter-spacing: -.02em; }
+.archiveHeading p { font-size: 12px; color: var(--muted); }
+.archiveGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; margin-top: 23px; }
+.archiveGrid > a { display: block; border-top: 1px solid var(--line); padding-block: 20px 10px; }
+.archiveMeta { font: 11px/1.7 var(--mono); color: var(--muted); }
+.archiveGrid h4 { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 22px; font-weight: 500; margin-top: 13px; letter-spacing: -.025em; }
+.archiveGrid h4 svg { width: 18px; color: var(--violet); transition: transform var(--transition); }
+.archiveGrid > a:hover h4 { color: var(--violet); }
+.archiveGrid > a:hover svg { transform: translate(2px, -2px); }
+.archiveGrid p { font-size: 14px; line-height: 1.85; color: var(--muted); margin-top: 12px; max-width: 50ch; }
+.repositoryLink { display: inline-block; color: var(--violet); font-size: 12px; margin-top: 15px; }
+.writingSection { padding-top: 85px; }
+.writingGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.writingCard { padding: 28px 30px 23px; background: #eeece6; border: 1px solid #d7d4cb; display: flex; flex-direction: column; transition: border-color var(--transition), background var(--transition); }
+.writingCard:nth-child(2) { background: #eae6f1; border-color: #d5cee3; }
+.writingCard:hover { border-color: var(--violet); background: #e8e2f1; }
+.writingMeta { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; font: 11px/1.8 var(--mono); color: #625a6e; }
+.writingMeta > span:last-child { color: var(--violet); }
+.writingCard h3 { font-size: clamp(25px, 2.7vw, 35px); letter-spacing: -.035em; font-weight: 500; line-height: 1.25; max-width: 20ch; margin-top: 30px; text-wrap: balance; }
+.writingCard p { font-size: 14px; color: var(--muted); line-height: 1.85; max-width: 45ch; margin-top: 18px; }
+.writingFooter { margin-top: auto; padding-top: 31px; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 12px; color: var(--violet); }
+.writingFooter svg { width: 22px; }
+@media (max-width: 760px) {
+  .writingSection { padding-top: 58px; }
+  .writingCard { padding: 23px; }
+  .writingGrid, .archiveGrid { gap: 22px; }
+}
 @media (max-width: 560px) {
+  .archiveHeading { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .archiveGrid, .writingGrid { grid-template-columns: 1fr; }
+  .writingSection { padding-top: 45px; }
+  .writingCard h3 { font-size: 29px; margin-top: 23px; }
   .header nav a { font-size: 12px; }
   .heroFoot { align-items: flex-start; }
   .heroFoot > span { max-width: 54%; }

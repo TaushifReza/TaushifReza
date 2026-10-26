@@ -2,7 +2,7 @@
 
 ## Scope
 
-Rebuild the current portfolio as a responsive, accessible single-page React application. The current repository baseline is a root `index.html`, README, GitHub profile trophy asset, and `.github` metadata. Preserve the README, trophy asset, and repository metadata. The prior portfolio can be consulted through version history; do not remove unrelated assets.
+Extend the responsive React portfolio with dedicated engineering articles, a compact verified repository archive, optional real project artifacts, and a newly built pretrained-model lab. Preserve the homepage identity, existing project IDs/disclosures, README, trophy asset, and repository metadata. Do not deploy.
 
 ## Technical choices
 
@@ -10,19 +10,21 @@ Rebuild the current portfolio as a responsive, accessible single-page React appl
 - CSS custom-property design tokens and scoped CSS modules.
 - Content kept in structured TypeScript data, separate from presentational components.
 - Native anchor navigation and native expandable case studies; no router, backend, analytics, or animation dependency.
-- Client-rendered React with a JavaScript-disabled explanation; no prerendering requirement. Anchors/disclosures remain native browser interactions after the initial render.
+- Multiple static HTML entry points with page-specific metadata and JavaScript-disabled explanations; lazy-load dedicated page modules. Shared path resolution supports root and configured nested hosting. No router or external embeds.
 - Inline SVG diagrams with accessible labels and equivalent nearby explanatory text.
+- Native JWT scenario/step controls operate on fixed synthetic fixtures; execute no cryptography. Mobile diagram alternatives preserve readable labels.
+- New browser lab uses an explicitly loaded, pinned pretrained model in a worker; keep its runtime out of the initial homepage path. Record model license/provenance and honest evaluation in `ai-lab.md`.
 - Produce the application source and build configuration only. Do not deploy or commit a generated portable `dist` directory.
 
 ## Implementation sequence
 
-1. Inspect the existing files and git history; retain README and trophy behavior/assets.
-2. Add Vite/React/TypeScript configuration and package scripts.
-3. Define typed portfolio content from `portfolio-content.md`.
-4. Build semantic page sections, navigation, case-study disclosures, and diagrams.
-5. Add responsive styling, focus states, reduced-motion support, and fragment auto-open enhancement.
-6. Review public text and assets for unsupported claims, private details, external dependencies, and path assumptions.
-7. Run the checks below and resolve issues before handoff.
+1. Review supplied evidence and public repositories; keep banking-app scope limited to verified account workflows.
+2. Add static page entries, portable links, metadata, and lazy page selection.
+3. Build home writing/archive additions, shared layout, optional artifact rendering, and the factual PDF article.
+4. Build synthetic JWT controls and conceptual diagrams; keep claims separate from production verification.
+5. Integrate the pretrained-model lab with explicit download, local worker inference, loading/retry/error/cancel states, and clear limitations.
+6. Check privacy, keyboard/reflow, direct static loads, nested hosting, external requests, factual boundaries, and the initial bundle.
+7. Run typecheck, lint, production build, distribution audit, and browser tests; review representative screenshots.
 
 ## Scripts
 
@@ -46,7 +48,8 @@ Development and build commands: `npm run dev`, `npm run typecheck`, `npm run lin
 - Keyboard-only navigation reaches every link/disclosure and has clear focus; heading structure and landmarks are semantic.
 - Check browser zoom/reflow, reduced-motion preference, direct section links, and direct case-study fragments that should auto-open.
 - Check diagrams at narrow widths and high zoom, including their text equivalents.
-- Verify local assets load, no console errors occur, and no remote asset requests or analytics are present.
+- Verify local assets load without console errors, initial pages make no remote requests, and only explicit lab loading accesses approved model sources. No analytics.
+- Test direct entry pages, nested hosting, back navigation, JWT scenarios/reset, and lab lifecycle states. Verify source-backed public links and no-JavaScript guidance.
 - Run lint, typecheck, production build, Playwright, and axe accessibility checks.
 - Confirm README, trophy SVG, and `.github` files remain intact.
 

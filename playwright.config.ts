@@ -6,6 +6,7 @@ import { defineConfig } from '@playwright/test';
 const baseURL = process.env.E2E_BASE_URL ?? 'http://127.0.0.1:4173/';
 const previewBase = new URL(baseURL).pathname;
 const quotedPreviewBase = `'${previewBase.replaceAll("'", "'\\''")}'`;
+const port = new URL(baseURL).port || '4173';
 const browserCache = join(homedir(), '.cache', 'ms-playwright');
 const cachedChromium = existsSync(browserCache)
   ? readdirSync(browserCache)
@@ -35,8 +36,8 @@ export default defineConfig({
   webServer: process.env.E2E_NO_WEBSERVER
     ? undefined
     : {
-        command: `npm run preview -- --host 127.0.0.1 --port 4173 --strictPort --base=${quotedPreviewBase}`,
+        command: `STATIC_BASE_PATH=${quotedPreviewBase} PORT=${port} node scripts/serve-static.mjs`,
         url: baseURL,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer: false,
       },
 });

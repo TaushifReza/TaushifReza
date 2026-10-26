@@ -1,3 +1,5 @@
+import type { ProjectEvidenceItem } from './evidence'
+
 export type ProjectId = 'bus-attendance' | 'intalent' | 'qr-ticketing' | 'pdf-generator'
 
 export interface Project {
@@ -12,6 +14,8 @@ export interface Project {
     approach: string
     outcome: string
     diagramDescription: string
+    article?: { path: string; label: string }
+    evidence?: readonly ProjectEvidenceItem[]
 }
 
 export const profile = {
@@ -55,6 +59,7 @@ export const projects: Project[] = [
         approach: 'I contributed to backend design and implementation discussions covering authentication, certification, jobs, and notifications. My design work included separating token issuance from verification with RSA-signed JWTs and JWKS, plus reasoning through enrollment and application workflows.',
         outcome: 'The design separates identity issuance from service-level verification, giving each backend a clear authentication responsibility. This case study covers architecture contributions and design discussions.',
         diagramDescription: 'Simplified design schematic: authentication provides identity verification for certification, jobs, and notification service boundaries. It describes design discussions rather than a verified deployment topology.',
+        article: { path: 'writing/jwt-jwks/', label: 'Explore JWT verification and authorization' },
     },
     {
         id: 'qr-ticketing',
@@ -81,7 +86,18 @@ export const projects: Project[] = [
         approach: 'I addressed the memory problem by creating a separate Fpdf instance for each sheet and merging bounded groups recursively with pdfcpu. This keeps the work divided into smaller units instead of retaining one growing document throughout the process.',
         outcome: 'Per-sheet generation and bounded recursive merging resolved the two reported out-of-memory failures. The fix came from changing how much of the document was held in memory at each stage.',
         diagramDescription: 'Simplified processing schematic: generate individual PDF sheets, merge them in bounded groups, then recursively combine groups into the final PDF.',
+        article: { path: 'writing/pdf-memory/', label: 'Read the full PDF memory case study' },
     },
+]
+
+export const writing = [
+    { number: '01', label: 'Go · Bounded resources', title: 'Smaller lifetimes. A more manageable PDF pipeline.', description: 'The generation and merge boundaries behind a fix for two production out-of-memory failures.', path: 'writing/pdf-memory/', format: 'Case study' },
+    { number: '02', label: 'JWT · JWKS · Access control', title: 'A valid signature is only the beginning.', description: 'Follow a request from token issuance to permission checks, with four interactive scenarios.', path: 'writing/jwt-jwks/', format: 'Interactive explainer' },
+]
+
+export const projectArchive = [
+    { title: 'Banking App', label: 'Django REST · Account workflows', description: 'An account-focused API covering registration, email OTP verification, JWT cookies, and profiles.', href: 'https://github.com/TaushifReza/banking-app' },
+    { title: 'go-social', label: 'Go · PostgreSQL · Redis', description: 'A social API with registration, posts, follows, and Redis-backed profile caching.', href: 'https://github.com/TaushifReza/go-social' },
 ]
 
 export const principles = [

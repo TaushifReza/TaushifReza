@@ -6,14 +6,18 @@ A light, technical editorial portfolio for backend engineering: warm off-white s
 
 ## Page structure
 
-Single-page site with anchor navigation and these sections:
+Portfolio home with anchor navigation and these sections:
 
 1. Compact introduction and social links.
 2. Selected work with concise summaries and expandable case studies.
-3. Engineering approach.
-4. Experience and education.
-5. Expertise.
-6. Contact links.
+3. Compact public-repository archive.
+4. Writing cards linking dedicated articles.
+5. Engineering approach, with a lab link in the learning aside.
+6. Experience and education.
+7. Expertise.
+8. Contact links.
+
+Dedicated pages at `/writing/pdf-memory/`, `/writing/jwt-jwks/`, and `/lab/incident-classifier/` share a header, home/section links, readable article typography, and footer. Navigation uses native links. Preserve selected-work IDs and disclosures. Article prose stays within 68 characters per line where space permits; full-width conceptual figures break up the reading rhythm.
 
 Use a compact sticky or static anchor nav depending on layout fit. All section IDs must be stable and directly addressable. Native `<details>` / `<summary>` should hold case-study expansions; opening a matching fragment on initial load should expand the appropriate case study.
 
@@ -25,6 +29,10 @@ Use a compact sticky or static anchor nav depending on layout fit. All section I
 - Use violet for emphasis and interactive states with sufficient contrast; do not rely on color alone to convey state.
 - Prefer inline, accessible SVG diagrams with visible labels, directional arrows, and a nearby text explanation. Diagrams must remain understandable when enlarged and must have text equivalents.
 - Avoid decorative stock imagery, remote widgets, external fonts, trackers, animation libraries, and unnecessary motion. Respect `prefers-reduced-motion`.
+- Replace wide merge/auth diagrams with readable stacked stage lists at narrow widths. Label conceptual visuals and explanatory pseudocode; do not imply production traces or source-code evidence.
+- Optional artifact components render only supplied real assets. Empty evidence fields produce no UI.
+
+The introduction uses the owner-approved transparent `public/bg_remove.png` portrait in place of the large orbit illustration. Preserve the original PNG, colors, opacity, natural aspect ratio, arms, and transparent breathing room; place it directly on the warm page background without a frame, card, glow, filter, or shadow. Use a 320px-wide portrait beside the introduction on desktop and approximately 240px at tablet widths. Below 760px, keep the headline, introduction, and actions full width, followed by a compact row pairing a 120px-wide portrait with the name and role. Reserve the image dimensions and prioritize its initial loading. The Approach section keeps its name, role, biography, and principles as text, so there is only one portrait. Retain the small footer orbit.
 
 ## Project story pattern
 
@@ -36,6 +44,7 @@ Each case study should make these points easy to scan: context and status, the e
 - Native links and buttons with descriptive accessible names; no pointer-only interactions.
 - Support zoom/reflow and reduced motion. Ensure expanded content and SVG captions are available to screen readers.
 - Maintain readable contrast, including focus indicators and muted text.
-- The approved application renders with client-side React. Once rendered, navigation uses native anchors and disclosures use native `<details>`; JavaScript additionally opens matching case-study fragments. Provide a `<noscript>` explanation for visitors with JavaScript disabled. Static rendering/prerendering is outside the approved implementation scope.
-- No external assets are required for the page to render.
+- Dedicated static HTML entry points supply metadata and no-JavaScript guidance. React renders their interactive content. Native anchors and disclosures remain browser controls; JavaScript opens matching case-study fragments. Direct page loads must work on static hosting and configured nested paths.
+- JWT controls use native select/buttons, current-stage text, and live status. Invalid token scenarios stop before authorization; fixtures execute no cryptography.
+- No external assets are required for initial rendering. Only explicit lab model loading may download the reviewed model artifacts; the lab explains download size, source, local inference, and limitations before that action.
 

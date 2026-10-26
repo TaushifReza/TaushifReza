@@ -12,6 +12,56 @@ async function expectNoOverflow(page: Page) {
   expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport + 1);
 }
 
+async function expectHeroPortraitLayout(page: Page, width: number) {
+  const portrait = page.locator('#top').getByRole('img', { name: 'Portrait of Taushif Reza' });
+  await expect(portrait).toBeVisible();
+  await expect(portrait).toBeInViewport({ ratio: 1 });
+  await page.evaluate(() => document.fonts.ready);
+  const layout = await portrait.evaluate((element) => {
+    const image = element as HTMLImageElement;
+    const bounds = image.getBoundingClientRect();
+    const caption = image.closest('figure')!.querySelector('figcaption')!.getBoundingClientRect();
+    let clipped = false;
+    for (let ancestor = image.parentElement; ancestor; ancestor = ancestor.parentElement) {
+      const style = getComputedStyle(ancestor);
+      const container = ancestor.getBoundingClientRect();
+      if (['hidden', 'clip'].includes(style.overflowX) && (bounds.left < container.left - 1 || bounds.right > container.right + 1)) clipped = true;
+      if (['hidden', 'clip'].includes(style.overflowY) && (bounds.top < container.top - 1 || bounds.bottom > container.bottom + 1)) clipped = true;
+    }
+    return {
+      image: { left: bounds.left, right: bounds.right, top: bounds.top, bottom: bounds.bottom, width: bounds.width, height: bounds.height },
+      caption: { left: caption.left, top: caption.top, bottom: caption.bottom },
+      clipped,
+    };
+  });
+  expect(layout.image.left).toBeGreaterThanOrEqual(0);
+  expect(layout.image.right).toBeLessThanOrEqual(width);
+  expect(layout.image.width / layout.image.height).toBeCloseTo(419 / 595, 2);
+  expect(layout.clipped).toBe(false);
+  expect(layout.image.width).toBeLessThanOrEqual(320);
+  if (width <= 760) {
+    expect(layout.image.width).toBeCloseTo(120, 0);
+    expect(layout.caption.left).toBeGreaterThanOrEqual(layout.image.right);
+    expect(layout.caption.top).toBeGreaterThanOrEqual(layout.image.top);
+    expect(layout.caption.bottom).toBeLessThanOrEqual(layout.image.bottom);
+  } else {
+    expect(layout.caption.top).toBeGreaterThanOrEqual(layout.image.bottom);
+  }
+  for (const name of ['Explore my work', 'Let’s connect']) {
+    const action = page.locator('#top').getByRole('link', { name, exact: false });
+    await expect(action).toBeVisible();
+    expect(await action.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return element.contains(document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
+    })).toBe(true);
+    const bounds = (await action.boundingBox())!;
+    const overlapsPortrait = bounds.x < layout.image.right && bounds.x + bounds.width > layout.image.left
+      && bounds.y < layout.image.bottom && bounds.y + bounds.height > layout.image.top;
+    expect(overlapsPortrait).toBe(false);
+    if (width <= 760) expect(bounds.y + bounds.height).toBeLessThanOrEqual(layout.image.top);
+  }
+}
+
 async function openProjects(page: Page) {
   for (const id of projectIds) {
     const disclosure = page.locator(`details#${id}-details`);
@@ -30,6 +80,20 @@ test('public identity, landmarks, links, and contact privacy', async ({ page }) 
   await expect(page.getByRole('main')).toHaveCount(1);
   await expect(page.getByRole('navigation')).toHaveCount(1);
   await expect(page.getByRole('main')).toContainText(/software engineer/i);
+  const portrait = page.locator('#top').getByRole('img', { name: 'Portrait of Taushif Reza' });
+  await expect(page.getByRole('img', { name: 'Portrait of Taushif Reza' })).toHaveCount(1);
+  await expect(page.locator('#approach img')).toHaveCount(0);
+  await expect(portrait).toBeVisible();
+  await expect.poll(() => portrait.evaluate((image) => {
+    const portrait = image as HTMLImageElement;
+    return [portrait.naturalWidth, portrait.naturalHeight];
+  })).toEqual([419, 595]);
+  await expect(portrait).toHaveAttribute('src', /\/bg_remove\.png$/);
+  await expect(portrait).toHaveAttribute('width', '419');
+  await expect(portrait).toHaveAttribute('height', '595');
+  await expect(portrait).toHaveAttribute('loading', 'eager');
+  await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+  await expect(portrait).toHaveAttribute('decoding', 'async');
   await expect(page.locator('a[href^="mailto:"], a[href^="tel:"], a[download], form')).toHaveCount(0);
   const links = await page.locator('a[href]').evaluateAll((elements) =>
     elements.map((element) => ({
@@ -44,6 +108,8 @@ test('public identity, landmarks, links, and contact privacy', async ({ page }) 
     expect([
       'https://github.com/TaushifReza',
       'https://www.linkedin.com/in/taushif-reza',
+      'https://github.com/TaushifReza/banking-app',
+      'https://github.com/TaushifReza/go-social',
     ]).toContain(href.replace(/\/$/, ''));
     if (target === '_blank') expect(rel.split(/\s+/)).toEqual(expect.arrayContaining(['noopener', 'noreferrer']));
   }
@@ -52,6 +118,7 @@ test('public identity, landmarks, links, and contact privacy', async ({ page }) 
 
 test('keyboard skip navigation, section anchors, and case studies', async ({ page }) => {
   await page.goto('./');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await page.keyboard.press('Tab');
   const skipLink = page.getByRole('link', { name: /skip/i });
   await expect(skipLink).toBeFocused();
@@ -91,11 +158,12 @@ test('case-study fragments expand on first load and hash navigation', async ({ p
   }
 });
 
-for (const width of [320, 390, 768, 1440, 1920]) {
+for (const width of [320, 390, 768, 1024, 1440, 1920]) {
   test(`reflows at ${width}px, including all expanded diagrams`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('./');
     await expectNoOverflow(page);
+    await expectHeroPortraitLayout(page, width);
     await page.screenshot({ path: testInfo.outputPath(`portfolio-${width}-viewport.png`) });
     await openProjects(page);
     await expectNoOverflow(page);

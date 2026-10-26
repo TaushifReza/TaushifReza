@@ -16,11 +16,21 @@ function walk(directory) {
   }
 }
 
-if (!existsSync(join(output, 'index.html'))) {
-  console.error('Build audit failed: index.html missing. Run npm run build first.');
+const pages = ['index.html', 'writing/pdf-memory/index.html', 'writing/jwt-jwks/index.html', 'lab/incident-classifier/index.html'];
+const publicAssets = new Set(['favicon.svg', 'social-card.svg', 'social-card.png', 'bg_remove.png']);
+if (pages.some((page) => !existsSync(join(output, page)))) {
+  console.error('Build audit failed: expected multipage HTML output missing. Run npm run build first.');
   process.exit(1);
 }
 walk(output);
+
+for (const name of publicAssets) {
+  const published = join(output, name);
+  if (!existsSync(published)) failures.push(`Approved public asset missing: ${name}`);
+  else if (!readFileSync(published).equals(readFileSync(join(root, 'public', name)))) {
+    failures.push(`Approved public asset was changed during publication: ${name}`);
+  }
+}
 
 // Contact values are collected only for exact matching and never logged.
 // PDF extraction is optional; a missing pdftotext executable limits this check.
@@ -48,10 +58,32 @@ for (const name of privateInputs) {
 
 for (const file of files) {
   const name = relative(output, file);
+  const extension = extname(file);
+  if (/(?:^|\/)(?:pp\.jpg|half_body\.jpg|.*:Zone\.Identifier)$/i.test(name)) {
+    failures.push(`Unapproved original image or download sidecar in distribution: ${name}`);
+  }
   if (/\.(?:pdf|md|docx?|map)$/i.test(name) || /(?:^|\/)(?:AGENTS|README|.*_context)(?:\.|\/)/i.test(name)) {
     failures.push(`Private/source document or source map in distribution: ${name}`);
   }
-  if (!['.html', '.js', '.css', '.json', '.svg', '.txt'].includes(extname(file))) continue;
+  const artifact = /^artifacts\/[\w/-]+\.(?:png|jpe?g|webp|svg|mp4|webm|vtt|txt|json)$/.test(name);
+  if (!pages.includes(name) && !publicAssets.has(name) && !artifact && !name.startsWith('assets/')) {
+    failures.push(`File is outside the approved page/public/generated-asset manifest: ${name}`);
+  }
+  if (!artifact && !['.html', '.js', '.mjs', '.css', '.json', '.svg', '.txt', '.png', '.wasm'].includes(extension)) {
+    failures.push(`Unexpected distribution file type: ${name}`);
+    continue;
+  }
+  if (extension === '.wasm') {
+    // Only the explicitly bundled ONNX browser runtime is expected; model
+    // weights must stay opt-in downloads and never enter the distribution.
+    if (!/^assets\/ort-wasm-[\w.-]+\.wasm$/.test(name) || statSync(file).size > 64 * 1024 * 1024) {
+      failures.push(`Unapproved runtime binary: ${name}`);
+    }
+    const signature = readFileSync(file).subarray(0, 4);
+    if (!signature.equals(Buffer.from([0, 97, 115, 109]))) failures.push(`Invalid WebAssembly asset: ${name}`);
+    continue;
+  }
+  if (['.png', '.jpg', '.jpeg', '.webp', '.mp4', '.webm'].includes(extension)) continue;
   if (statSync(file).size > 10 * 1024 * 1024) {
     failures.push(`Text asset unexpectedly exceeds 10 MiB: ${name}`);
     continue;
@@ -71,5 +103,6 @@ if (failures.length) {
   console.error(`Build audit failed (${failures.length} finding(s)):\n${failures.map((failure) => `- ${failure}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`Build audit passed: ${files.length} output files; no private documents, contact matches, private-network patterns, or local filesystem links detected.`);
+console.log(`Build audit passed: ${files.length} output files; expected HTML pages present; no private documents, contact matches, private-network patterns, or local filesystem links detected in scanned text assets.`);
+console.log('Approved ONNX WebAssembly runtime binaries receive filename, size, and format checks only; their compiled contents are not audited for private data.');
 console.log(`PDF contact extraction: ${pdfExamined ? 'examined local PDF input' : 'unavailable; exact PDF contact matching not performed'}. Pattern checks are limited assurance and supplement manual content review.`);
