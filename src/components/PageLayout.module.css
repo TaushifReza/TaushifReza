@@ -1,38 +1,220 @@
-.container { width: min(var(--page-width), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
-.skipLink { position: fixed; z-index: 100; top: 12px; left: 18px; padding: 14px 20px; background: var(--violet); color: white; transform: translateY(-160%); }
-.skipLink:focus { transform: translateY(0); }
-.header { border-bottom: 1px solid var(--line); }
-.headerInner { width: min(var(--page-width), calc(100% - var(--gutter) * 2)); margin: auto; min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-.brand { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; font-size: 14px; font-weight: 600; white-space: nowrap; }
-.monogram { font: italic 600 35px var(--serif); letter-spacing: -4px; padding-right: 5px; }
-.monogram span { color: var(--violet); }
-.header nav { display: flex; align-items: center; gap: 33px; }
-.header nav a { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; }
-.header nav a:hover, .footer a:hover { color: var(--violet); }
-.intro { padding-block: 30px 56px; border-bottom: 1px solid var(--line); }
-.back { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; color: var(--muted); margin-bottom: 43px; }
-.back:hover { color: var(--violet); }
-.eyebrow { font: 11px/1.7 var(--mono); letter-spacing: .07em; color: var(--violet); text-transform: uppercase; }
-.intro h1 { max-width: 950px; font-size: clamp(42px, 5.7vw, 76px); font-weight: 500; line-height: 1.08; letter-spacing: -.055em; margin-top: 22px; text-wrap: balance; }
-.description { max-width: 66ch; font-size: 18px; line-height: 1.8; color: var(--muted); margin-top: 26px; }
-.content { padding-block: 45px 80px; }
-.content h2 { max-width: 68ch; font-size: clamp(25px, 3vw, 34px); font-weight: 500; line-height: 1.25; letter-spacing: -.035em; }
-.content h3 { font-weight: 500; line-height: 1.4; }
-.content p { max-width: 68ch; line-height: 1.85; }
-.content a { color: var(--violet); text-decoration: underline; text-underline-offset: 4px; }
-.content code { font: .87em/1.7 var(--mono); overflow-wrap: anywhere; }
-.content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-.footer { display: flex; align-items: center; justify-content: space-between; gap: 25px; border-top: 1px solid var(--line); padding-block: 30px; font-size: 12px; }
-.footer a { min-height: 44px; display: flex; justify-content: center; flex-direction: column; gap: 8px; }
-.footer span { color: var(--muted); font-size: 11px; }
+.container {
+    width: min(var(--page-width), calc(100% - var(--gutter) * 2));
+    margin-inline: auto;
+}
+
+.skipLink {
+    position: fixed;
+    z-index: 100;
+    top: 12px;
+    left: 18px;
+    padding: 14px 20px;
+    background: var(--violet);
+    color: white;
+    transform: translateY(-160%);
+}
+
+.skipLink:focus {
+    transform: translateY(0);
+}
+
+.header {
+    border-bottom: 1px solid var(--line);
+}
+
+.headerInner {
+    width: min(var(--page-width), calc(100% - var(--gutter) * 2));
+    margin: auto;
+    min-height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.monogram {
+    font: italic 600 35px var(--serif);
+    letter-spacing: -4px;
+    padding-right: 5px;
+}
+
+.monogram span {
+    color: var(--violet);
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    gap: 33px;
+}
+
+.header nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.header nav a:hover,
+.footer a:hover {
+    color: var(--violet);
+}
+
+.intro {
+    padding-block: 30px 56px;
+    border-bottom: 1px solid var(--line);
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 43px;
+}
+
+.back:hover {
+    color: var(--violet);
+}
+
+.eyebrow {
+    font: 11px/1.7 var(--mono);
+    letter-spacing: .07em;
+    color: var(--violet);
+    text-transform: uppercase;
+}
+
+.intro h1 {
+    max-width: 950px;
+    font-size: clamp(42px, 5.7vw, 76px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -.055em;
+    margin-top: 22px;
+    text-wrap: balance;
+}
+
+.description {
+    max-width: 66ch;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-top: 26px;
+}
+
+.content {
+    padding-block: 45px 80px;
+}
+
+.content h2 {
+    max-width: 68ch;
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -.035em;
+}
+
+.content h3 {
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.content p {
+    max-width: 68ch;
+    line-height: 1.85;
+}
+
+.content a {
+    color: var(--violet);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.content code {
+    font: .87em/1.7 var(--mono);
+    overflow-wrap: anywhere;
+}
+
+.content pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border-top: 1px solid var(--line);
+    padding-block: 30px;
+    font-size: 12px;
+}
+
+.footer a {
+    min-height: 44px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
 @media (max-width: 650px) {
-  .headerInner { flex-wrap: wrap; gap: 0; padding-block: 9px; }
-  .header nav { width: 100%; justify-content: space-between; gap: 12px; }
-  .header nav a { font-size: 12px; }
-  .intro { padding-block: 16px 32px; }
-  .back { margin-bottom: 28px; }
-  .intro h1 { font-size: clamp(37px, 9vw, 54px); }
-  .description { font-size: 16px; margin-top: 20px; }
-  .content { padding-block: 30px 50px; }
-  .footer { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .headerInner {
+        flex-wrap: wrap;
+        gap: 0;
+        padding-block: 9px;
+    }
+
+    .header nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .header nav a {
+        font-size: 12px;
+    }
+
+    .intro {
+        padding-block: 16px 32px;
+    }
+
+    .back {
+        margin-bottom: 28px;
+    }
+
+    .intro h1 {
+        font-size: clamp(37px, 9vw, 54px);
+    }
+
+    .description {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    .content {
+        padding-block: 30px 50px;
+    }
+
+    .footer {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 }

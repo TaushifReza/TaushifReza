@@ -10,7 +10,7 @@ The Pages workflow checks pull requests, pushes to `main`, and manual runs. Only
 
 The custom domain serves the website at `/`; the repository name is not part of the production path. This differs from the default project URL `https://taushifreza.github.io/TaushifReza/`, which requires a `/TaushifReza/` build base. Configure the custom domain before relying on the root-base production build. Keep the default portable local build and nested-path checks available for development.
 
-Each of the four pages has its own static HTML document. Do not add SPA fallback rewrites. Canonical and social URLs identify the custom domain; metadata tests verify the image through the local test server rather than depending on a live deployment.
+The build prerenders five complete public documents: home, the Posts index, and three articles. It also generates sitemap, RSS, robots policy, and two legacy Writing migration documents. A temporary SSR bundle remains beneath ignored `node_modules/.cache/portfolio-prerender`; only final `dist/` is published. Do not add SPA fallback rewrites. Canonical and social URLs identify the custom domain; metadata tests verify images through the local test server rather than depending on a live deployment. Node.js 24+ is required.
 
 The workflow needs no personal access token or Cloudflare API token. Build jobs have read-only repository access; only the deployment job receives Pages write and OIDC permissions. The `github-pages` environment identifies the production deployment.
 
@@ -83,10 +83,14 @@ After a successful deployment, check the real site separately:
 
 - Apex HTTPS returns the portfolio; HTTP redirects to HTTPS after enforcement is enabled.
 - `https://www.taushifreza.com.np/` redirects to `https://taushifreza.com.np/`.
-- Home, `/writing/pdf-memory/`, `/writing/jwt-jwks/`, and `/lab/incident-classifier/` load directly and after refresh. Explicit `index.html` URLs retain directory canonical URLs.
+- Home, `/posts/`, `/posts/jwt-jwks/`, `/posts/pdf-memory/`, and `/posts/survey-question-snapshots/` load directly and after refresh. Explicit `index.html` URLs retain directory canonical URLs. Article text, references, and navigation remain readable with JavaScript disabled.
+- Old `/writing/pdf-memory/` and `/writing/jwt-jwks/` documents have a visible destination link, new canonical target, and working HTML meta refresh. These are not HTTP 301 responses.
+- Sitemap, RSS, robots policy, and JSON-LD identify the same public pages and production URLs; migration/lab URLs are excluded from discovery documents.
 - Portrait, favicon, social image, styles, and scripts load without errors. Test keyboard navigation and narrow-mobile layout.
 - An unknown page and private/source-document paths return real 404 responses.
-- The lab requests no model before opt-in. After choosing **Load model**, verify worker and WebAssembly assets load with suitable content types and the pinned external model download works. This optional check downloads approximately 96 MB of model/tokenizer files; the local WASM runtime is approximately 14 MB.
+- The former `/lab/incident-classifier/` URL returns 404. No model/worker/WebAssembly files or model downloads remain, and reading the site makes no external requests.
+
+After the new site is live, the owner may verify it in Google Search Console, submit `https://taushifreza.com.np/sitemap.xml`, and inspect representative post URLs. This is an optional manual account step; the repository adds no analytics or tracking. Crawlable HTML, references, and accurate structured data improve accessibility to search and AI systems, but do not guarantee indexing, ranking, recommendation, or citation.
 
 Do not run the complete local suite against the live domain: some assertions intentionally check the local server's specific redirect and malformed-path behavior. Use targeted live smoke checks instead. Record actual deployment and live-check results separately; they are not established merely by adding this guide.
 

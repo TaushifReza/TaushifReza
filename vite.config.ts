@@ -3,6 +3,8 @@ import { isAbsolute, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { discoveryFiles, renderDocument, renderMigration } from './scripts/site-document.mjs'
+import type { SiteModule } from './scripts/site-document.mjs'
 
 const publicDirectory = fileURLToPath(new URL('./public', import.meta.url))
 const allowedPublicAssets = new Set(['favicon.svg', 'social-card.svg', 'social-card.png', 'bg_remove.png'])
@@ -32,18 +34,10 @@ function isUnapprovedPublicFile(path: string, approved: Map<string, string>) {
 
 export default defineConfig({
   base: './',
+  appType: 'mpa',
   build: {
     copyPublicDir: false,
-    rolldownOptions: {
-      input: {
-        home: fileURLToPath(new URL('./index.html', import.meta.url)),
-        pdfMemory: fileURLToPath(new URL('./writing/pdf-memory/index.html', import.meta.url)),
-        jwtJwks: fileURLToPath(new URL('./writing/jwt-jwks/index.html', import.meta.url)),
-        incidentClassifier: fileURLToPath(new URL('./lab/incident-classifier/index.html', import.meta.url)),
-      },
-    },
   },
-  worker: { format: 'es' },
   plugins: [
     react(),
     {
@@ -54,7 +48,7 @@ export default defineConfig({
         }
       },
       configureServer(server) {
-        server.middlewares.use((request, response, next) => {
+        server.middlewares.use(async (request, response, next) => {
           let pathname: string
           try {
             pathname = decodeURIComponent(new URL(request.url ?? '/', 'http://vite.local').pathname)
@@ -77,6 +71,50 @@ export default defineConfig({
             response.statusCode = 403
             response.end('Public asset is not approved for publication')
             return
+          }
+          if (requestPath === '/lab' || requestPath.startsWith('/lab/')) {
+            response.statusCode = 404
+            response.end('Not found')
+            return
+          }
+          const candidate = requestPath.replace(/index\.html$/, '')
+          if (candidate === '/' || candidate === '/posts' || candidate.startsWith('/posts/') || candidate.startsWith('/writing/') || ['sitemap.xml', 'feed.xml', 'robots.txt'].some((name) => requestPath === `/${name}`)) {
+            try {
+              const site = await server.ssrLoadModule('/src/entry-server.tsx') as SiteModule
+              const discovery = discoveryFiles(site)[requestPath.slice(1)]
+              if (discovery) {
+                response.setHeader('Content-Type', requestPath.endsWith('.xml') ? 'application/xml; charset=utf-8' : 'text/plain; charset=utf-8')
+                response.end(discovery)
+                return
+              }
+              const legacy = /^\/writing\/(pdf-memory|jwt-jwks)\/$/.exec(candidate)
+              if (legacy) {
+                response.setHeader('Content-Type', 'text/html; charset=utf-8')
+                response.end(renderMigration(site.origin, legacy[1]))
+                return
+              }
+              const route = site.getRoutes().find((entry) => `/${entry.path}` === candidate || `/${entry.path}` === `${candidate}/`)
+              if (route) {
+                if (!requestPath.endsWith('/') && !requestPath.endsWith('index.html')) {
+                  response.statusCode = 301
+                  response.setHeader('Location', `${pathname}/${new URL(request.url ?? '/', 'http://vite.local').search}`)
+                  response.end()
+                  return
+                }
+                // Vite's HTML transform applies the configured development base.
+                // Give it root-relative asset URLs so that prefix is applied once.
+                const html = renderDocument(site, route, { script: 'src/main.tsx', base: '/' })
+                response.setHeader('Content-Type', 'text/html; charset=utf-8')
+                response.end(await server.transformIndexHtml(pathname, html))
+                return
+              }
+              response.statusCode = 404
+              response.end('Not found')
+              return
+            } catch (error) {
+              next(error)
+              return
+            }
           }
           next()
         })

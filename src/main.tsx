@@ -1,19 +1,15 @@
-import { StrictMode, Suspense, lazy } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import Page, { type PageIdentity } from './site/Page'
+import { SitePathProvider } from './lib/sitePaths'
 import './styles/global.css'
 
-const pages = {
-  home: lazy(() => import('./app/App')),
-  'pdf-memory': lazy(() => import('./pages/PdfMemoryPage')),
-  'jwt-jwks': lazy(() => import('./pages/JwtJwksPage')),
-  'incident-classifier': lazy(() => import('./pages/IncidentClassifierPage')),
-}
-const page = document.documentElement.dataset.page ?? 'home'
-const Page = pages[page as keyof typeof pages]
-if (!Page) throw new Error(`Unknown page: ${page}`)
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Suspense fallback={<p role="status">Loading page…</p>}><Page /></Suspense>
-  </StrictMode>,
-)
+const documentData = document.documentElement.dataset
+const page = documentData.page ?? 'home'
+if (!['home', 'posts', 'post'].includes(page)) throw new Error(`Unknown page: ${page}`)
+const tree = <StrictMode><SitePathProvider siteRoot={documentData.siteRoot ?? './'}>
+    <Page page={page as PageIdentity['page']} slug={documentData.postSlug} />
+</SitePathProvider></StrictMode>
+const root = document.getElementById('root')!
+if (documentData.prerendered === 'true') hydrateRoot(root, tree)
+else createRoot(root).render(tree)

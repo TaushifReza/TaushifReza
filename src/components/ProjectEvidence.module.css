@@ -1,6 +1,40 @@
-.evidence { display: grid; gap: 22px; border-top: 1px solid var(--line); padding-top: 22px; }
-.evidence img, .evidence video { width: 100%; height: auto; display: block; }
-.evidence figcaption { font-size: 13px; line-height: 1.8; color: var(--muted); margin-top: 10px; }
-.evidence a { color: var(--violet); text-decoration: underline; text-underline-offset: 4px; min-height: 44px; display: inline-flex; align-items: center; }
-.evidence p { font-size: 14px; }
-.evidence p > span { display: block; margin-top: 5px; color: var(--muted); line-height: 1.8; }
+.evidence {
+    display: grid;
+    gap: 22px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+}
+
+.evidence img,
+.evidence video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.evidence figcaption {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.evidence a {
+    color: var(--violet);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.evidence p {
+    font-size: 14px;
+}
+
+.evidence p>span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    line-height: 1.8;
+}

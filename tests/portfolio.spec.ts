@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const projectIds = ['bus-attendance', 'intalent', 'qr-ticketing', 'pdf-generator'];
+const projectIds = ['intalent', 'survey', 'bus-attendance', 'attendance', 'qr-ticketing', 'pdf-generator', 'mango'];
 const sectionIds = ['work', 'approach', 'experience', 'expertise', 'contact'];
 
 async function expectNoOverflow(page: Page) {
@@ -78,7 +78,8 @@ test('public identity, landmarks, links, and contact privacy', async ({ page }) 
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
   await expect(page.getByRole('main')).toContainText('Taushif');
   await expect(page.getByRole('main')).toHaveCount(1);
-  await expect(page.getByRole('navigation')).toHaveCount(1);
+  await expect(page.getByRole('navigation', { name: 'Main navigation' })).toHaveCount(1);
+  await expect(page.getByRole('navigation', { name: 'More social profiles' })).toHaveCount(1);
   await expect(page.getByRole('main')).toContainText(/software engineer/i);
   const portrait = page.locator('#top').getByRole('img', { name: 'Portrait of Taushif Reza' });
   await expect(page.getByRole('img', { name: 'Portrait of Taushif Reza' })).toHaveCount(1);
@@ -110,10 +111,29 @@ test('public identity, landmarks, links, and contact privacy', async ({ page }) 
       'https://www.linkedin.com/in/taushif-reza',
       'https://github.com/TaushifReza/banking-app',
       'https://github.com/TaushifReza/go-social',
+      'https://intalentnepal.com',
+      'https://x.com/TaushifR786',
+      'https://bsky.app/profile/taushifreza.bsky.social',
+      'https://www.instagram.com/taushifreza',
     ]).toContain(href.replace(/\/$/, ''));
     if (target === '_blank') expect(rel.split(/\s+/)).toEqual(expect.arrayContaining(['noopener', 'noreferrer']));
   }
   expect(links.some(({ href }) => /\.(?:pdf|docx?)(?:[?#]|$)/i.test(href))).toBe(false);
+  expect(await page.locator('#work article[id]').evaluateAll(elements => elements.slice(0, 4).map(element => element.id))).toEqual(projectIds.slice(0, 4));
+  await expect(page.locator('#survey a[href^="https:"]')).toHaveCount(0);
+  await expect(page.locator('details#intalent-details')).not.toHaveAttribute('open', '');
+  const liveLink = page.getByRole('link', { name: 'Visit inTalent', exact: true });
+  await expect(liveLink).toHaveCount(1);
+  await expect(liveLink).toBeVisible();
+  await expect(liveLink).toHaveAttribute('href', 'https://intalentnepal.com');
+  await expect(page.locator('#mango')).toContainText(/course-based/i);
+  await expect(page.locator('#expertise')).toContainText('Python');
+  await expect(page.locator('#expertise')).toContainText('C#');
+  for (const [name, href] of [['X', 'https://x.com/TaushifR786'], ['Bluesky', 'https://bsky.app/profile/taushifreza.bsky.social'], ['Instagram', 'https://www.instagram.com/taushifreza']]) {
+    await expect(page.getByRole('navigation', { name: 'More social profiles' }).getByRole('link', { name, exact: false })).toHaveAttribute('href', href);
+  }
+  await expect(page.getByRole('link', { name: 'Lab', exact: true })).toHaveCount(0);
+  await expect(page.locator('a[href*="lab/incident-classifier"]')).toHaveCount(0);
 });
 
 test('keyboard skip navigation, section anchors, and case studies', async ({ page }) => {
@@ -127,7 +147,7 @@ test('keyboard skip navigation, section anchors, and case studies', async ({ pag
 
   for (const id of sectionIds) {
     await expect(page.locator(`#${id}`)).toHaveCount(1);
-    const navLink = page.getByRole('navigation').locator(`a[href="#${id}"]`);
+    const navLink = page.getByRole('navigation', { name: 'Main navigation' }).locator(`a[href="#${id}"]`);
     if (!(await navLink.count())) continue;
     await navLink.click();
     await expect(page).toHaveURL(new RegExp(`#${id}$`));
@@ -233,17 +253,20 @@ test('production page loads local assets without errors or external requests', a
   expect(externalRequests).toEqual([]);
 });
 
-test('JavaScript-disabled visitors receive an explanation', async ({ browser, baseURL }) => {
+test('JavaScript-disabled visitors can read the portfolio and expand project details', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
   try {
     await page.goto('./');
-    const explanation = page.locator('noscript p');
-    await expect(explanation).toBeVisible();
-    await expect(explanation).toContainText(/JavaScript/i);
-    await expect(explanation.getByRole('link', { name: 'GitHub', exact: true })).toBeVisible();
-    await expect(explanation.getByRole('link', { name: 'LinkedIn', exact: true })).toBeVisible();
-  } finally {
-    await context.close();
-  }
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Good systems.');
+    await expect(page.locator('#expertise')).toContainText('Python');
+    for (const id of projectIds) {
+      const disclosure = page.locator(`details#${id}-details`);
+      await disclosure.locator('summary').click();
+      await expect(disclosure).toHaveAttribute('open', '');
+      await expect(disclosure).toContainText('My contribution');
+    }
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Posts', exact: true }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Notes from the work.');
+  } finally { await context.close(); }
 });

@@ -1,87 +1,90 @@
 # Local development and verification
 
-Use Node.js 22.12+ (or a supported newer release) and npm. Install locked dependencies with `npm ci`; use `npm install` only when intentionally updating dependencies.
+Use **Node.js 24+** and npm. Node 24 is used in CI and supports the typed metadata import used by the distribution audit. React and ReactDOM are the only runtime dependencies; the former model library and its transitive runtime packages have been removed.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Before handing off a change, run:
+The development server renders the registered routes through Vite's SSR loader, then hydrates their React tree. It also serves generated discovery files and legacy migration documents. Removed lab paths return 404. No employer source or private context is needed to run the site.
+
+## Build and static hosting
 
 ```sh
-npm run typecheck
 npm run lint
+npm run typecheck
 npm run build
 npm run audit:dist
 npm run test:e2e
 ```
 
-The production build creates four separate HTML entries: `/`, `/writing/pdf-memory/`, `/writing/jwt-jwks/`, and `/lab/incident-classifier/`. Each entry declares its page and relative site root; React loads only that page's content. Native links navigate between the static documents without a client router. `siteHref` resolves internal links against the declared root, including pages reached through their explicit `index.html` URL.
+The build runs a Vite client build followed by a temporary SSR build under ignored `node_modules/.cache/portfolio-prerender`. It uses React rendering to write full response HTML, then the browser hydrates the identical component tree. The generated client manifest is used to locate JavaScript/CSS and removed before publication. Server build files stay outside `dist/`.
 
-## Static hosting and portable output
+Current public pages:
 
-Vite uses relative asset paths by default (`base: './'`). Generated `dist/` stays untracked. The Pages workflow builds with `--base=/` for `https://taushifreza.com.np/`; Cloudflare provides DNS. See [deployment setup](deployment.md) for authenticated GitHub/Cloudflare configuration, publication, verification, and rollback. Adding the workflow does not itself deploy the new application. Serve the contents of `dist/`; never serve the repository root. A host must serve directory `index.html` files and return real 404 responses for unknown paths. SPA fallback rewrites are unnecessary and would conceal missing pages.
+- `/`
+- `/posts/`
+- `/posts/jwt-jwks/`
+- `/posts/pdf-memory/`
+- `/posts/survey-question-snapshots/`
 
-Playwright uses `scripts/serve-static.mjs`, a local-only server that serves `dist/` exclusively, redirects directory URLs to a trailing slash, and returns 404 for absent files. It does not use Vite preview or a development fallback. To inspect the build manually:
+The registry also generates `/sitemap.xml`, `/feed.xml`, and `/robots.txt`, with truthful metadata and no invented dates. `/writing/jwt-jwks/` and `/writing/pdf-memory/` are small HTML migration pages with a canonical destination, visible link, and meta refresh. They are not HTTP 301 redirects. The former lab URL is absent and returns 404.
+
+Vite defaults to portable relative assets (`base: './'`). The Pages workflow builds with `--base=/` for `https://taushifreza.com.np/`. Native links use the same depth-relative `SitePathProvider`/`useSiteHref` contract during server rendering and hydration, including explicit `index.html` loads. There is no client router or SPA fallback.
+
+Serve **only `dist/`**, never the repository root. The local production harness serves directory index files, redirects missing directory slashes, supplies XML MIME types, and returns real 404s:
 
 ```sh
 npm run build
 npm run serve:static
 ```
 
-The default URL is `http://127.0.0.1:4173/`. `PORT` overrides the local port, and `STATIC_BASE_PATH=/portfolio/` mounts the distribution beneath a prefix. `E2E_BASE_URL` configures the tested URL and the Playwright server's matching prefix and port. `E2E_NO_WEBSERVER=1` uses a separately started server. Playwright deliberately refuses to reuse an existing server, avoiding accidental tests against source-serving or fallback servers.
-
-To verify an explicit nested hosting path:
+Default URL: `http://127.0.0.1:4173/`. `PORT` overrides the port; `STATIC_BASE_PATH=/portfolio/` mounts output at a prefix. `E2E_BASE_URL` configures browser tests and the matching harness prefix/port. `E2E_NO_WEBSERVER=1` uses a separately started server. Tests intentionally do not reuse another server.
 
 ```sh
 npm run build -- --base=/portfolio/
 npm run audit:dist
 E2E_BASE_URL=http://127.0.0.1:4173/portfolio/ npm run test:e2e
 npm run build
+npm run audit:dist
 ```
 
-The final command restores the portable build. A production host must mount `dist/` at the configured prefix. Favicons use depth-relative paths; canonical and social metadata identify `https://taushifreza.com.np/`, with directory URLs for the articles and lab. Tests verify those production URLs without requesting the live domain and check the social image through the local test server.
+The final commands restore and audit the portable build. Canonical/social/feed URLs still identify the production domain; local tests assert those values while checking assets through the local server, without depending on the live site.
 
-## Browser and content checks
+## Adding a post
 
-Install Chromium with `npx playwright install chromium` if needed. The config detects an existing Linux Playwright Chromium cache, or accepts `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. Screenshots, traces, and HTML reports live under ignored `tests/results` and `tests/report` directories.
+1. Create an article component under `src/posts/`, with original prose/examples, semantic headings, stable section IDs, and public references. Use `useSiteHref()` for site links.
+2. Register its `Body` and section navigation in `src/posts/index.ts`.
+3. Add metadata to `src/data/posts.ts`: unique lowercase hyphenated slug, title, description, topic tags, and positive integer reading-minute estimate. Add publication/update dates only when known and truthful; use valid ISO date values.
+4. Run the commands above. Listing, preview, route HTML, head metadata, structured data, sitemap, and RSS derive from the registry automatically. No new hand-written HTML entry is needed.
 
-The browser suite preserves the original homepage checks and covers direct directory and `index.html` loads, refresh, static redirects and real 404s, per-page metadata/assets, return fragments, allowed public links, JavaScript-disabled explanations, and absence of external requests before model opt-in. All pages are checked for overflow at 320, 390, 768, 1440, and 1920 CSS pixels; the homepage also covers 1024 pixels. Homepage checks verify the single eager/high-priority 419 × 595 hero portrait, its full aspect ratio and visibility, unblocked action links, a compact 120px image beside its caption on mobile, and a portrait no wider than 320px on desktop. The About section has no second portrait. Mobile/desktop axe scans include the expanded JWT stepper and a populated classifier result. Stepper tests exercise all four scenarios, previous/next, terminal rejection, and reset. Mocked worker tests exercise opt-in creation, download failure/retry, empty-input validation, ranking, reset, and stale response rejection; these interface tests do not establish model accuracy. A server-rendered fixture validates both empty optional evidence and populated image/video/link markup without publishing invented artifacts.
+All articles must have a content registration matching their metadata slug. Do not publish employer excerpts, internal addresses, credentials, customer records, or local source paths. Original simplified examples should be identified as explanatory rather than production code.
 
-A 640px homepage reflow check approximates the layout viewport of a 1280px window at 200% zoom. It does not verify browser chrome zoom or text enlargement. Automated axe and keyboard checks supplement manual accessibility review and do not establish complete accessibility conformance.
+## Browser and accessibility checks
 
-## AI lab and evaluation
+Install Chromium when needed with `npx playwright install chromium`. CI installs its system dependencies with `npx playwright install --with-deps chromium`. The config detects a Linux Playwright cache or accepts `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. Screenshots/traces/reports are ignored under `tests/results` and `tests/report`.
 
-The lab pins `@huggingface/transformers` to 4.3.1. Inference runs in a dedicated browser worker using a local WebAssembly runtime. Neither the model nor the inference library is requested until the visitor chooses Load model. Model files download from the pinned Hugging Face revision; incident text is never sent to a remote inference endpoint. Building the site bundles runtime assets and does not download model weights.
+The suite checks production documents rather than development fallbacks: complete response HTML and JavaScript-disabled reading, hydration/console errors, direct directory/index loads, page metadata, local assets, legacy migration, discovery files, private/unknown/lab 404s, keyboard navigation, case-study fragments, responsive layout, reduced motion, and JWT synthetic scenarios. Article text, references, and navigation must be available without JavaScript; the JWT interaction supplements that content.
 
-```sh
-npm run build
-npm run evaluate:lab
-```
+The single eager/high-priority 419×595 portrait retains its natural ratio, with a compact mobile caption row and no duplicate About photo. Layout checks and axe scans supplement visual/keyboard review. A 640px layout viewport is a reflow proxy, not a verified browser-chrome 200% zoom test. Actual browser zoom, text enlargement, and manual screen-reader conformance remain separate checks.
 
-The separate opt-in evaluator serves production `dist/` with `scripts/serve-static.mjs` on port 4187 and runs the real pinned browser worker over the frozen synthetic dataset; it does not use Vite's development server or source imports. A first model load downloads about 96 MB of model/tokenizer files and fetches the regular ~14 MB WebAssembly runtime from this site. Default browser tests never download the model. See [AI lab documentation](ai-lab.md) for the completed metrics, configuration, dataset limitations, report format, and evaluation procedure.
+## Publication privacy
 
-## Publication privacy checks
+The build copies only reviewed favicon/social assets, original approved `public/bg_remove.png`, and reviewed evidence files beneath `public/artifacts/`. It skips symlinks. Original unused photos, sidecars, raw context/CV, private documents, and source maps remain excluded. The development server preserves matching public-file restrictions and private-path denial.
 
-The build copies only the reviewed favicon/social assets, the owner-approved `public/bg_remove.png` hero portrait, and approved media, captions, text, or JSON beneath `public/artifacts/`; it skips symbolic links. The transparent 419 × 595 PNG is published as the original bytes, preserving its pixels and alpha. Its reviewed source contains only PNG image/header/end chunks and needs no metadata transformation. The development server serves the same approved file normally. The original `pp.jpg`, unused `half_body.jpg`, and all download sidecars remain untouched on disk, are excluded from the build, and cannot be served by the development server. Add real project evidence only after its content and publication rights have been reviewed. No current project evidence media is populated. PDFs, download sidecars, and raw editorial/private documents remain forbidden.
+The distribution audit requires expected pages/discovery documents, checks approved asset bytes, enforces its output manifest, rejects removed model/runtime assets, scans supported text for private input references/contact protocols/private-network patterns/local paths, and optionally compares exact contact values extracted from local context/PDF inputs. It never prints those private values. CI cannot compare absent ignored private inputs. Image/video binary contents are not privacy-scanned; automated checks supplement manual review rather than prove absence of every private detail.
 
-The distribution audit requires all four HTML outputs and the explicit public-asset manifest, verifies that published public assets exactly match their source bytes, and rejects files outside the page/public/generated-asset manifest. It also rejects original JPEG portraits, download sidecars, private/source documents, source maps, unexpected file types, raw private input references, contact protocols, exact contact values extracted from local context/PDF files, private-network IPv4 patterns, and local filesystem asset links. It scans JavaScript including `.mjs`, CSS, HTML, JSON, SVG, captions, and text. Optional `pdftotext` enables exact PDF contact matching. It never prints extracted private values. CI cannot perform exact contact comparisons against ignored private source documents absent from its checkout; the public-asset allowlist and general pattern checks still run.
-
-Bundled ONNX WebAssembly binaries receive approved filename, size, and format checks. Compiled binary contents and image/video contents are not privacy-scanned. These limited checks supplement manual review; they do not prove that all private information is absent. The development server also denies documents, private context inputs, credentials, and direct filesystem access to those paths.
-
-## Public link review
-
-GitHub/LinkedIn profile and repository links use the source-supported public destinations. The articles link to official RFCs; the lab links to its pinned Hugging Face model revision and upstream model. Automated URL allowlists check those intended destinations but do not guarantee their future availability. LinkedIn may return an automated-access restriction rather than its normal interactive page.
+No model download, inference library, worker, or WebAssembly runtime is part of this portfolio. The removed lab evaluator and its tests are no longer available.
 
 ## Verification record
 
-On 26 October 2026, the root-path Playwright run passed all 53 tests (55.9 seconds), and the `/portfolio/` run passed all 53 (50.2 seconds). The TypeScript check, lint, production builds, 27-output distribution audits, and whitespace diff check passed. The real browser-worker evaluation completed successfully on the frozen 40-example synthetic dataset: 36 correct (90.0% accuracy), macro F1 0.9032, and 13 uncertain results; the dataset hash was unchanged. Results describe this synthetic set and do not establish performance on real incidents. The model opt-in downloads about 96 MB of model/tokenizer files and uses the site's approximately 14 MB WebAssembly runtime.
+On 27 October 2026, the Posts migration passed lint, TypeScript, the root production build, the 16-output distribution audit, and whitespace checks. The production Playwright suite passed all 62 tests at the root (58.8 seconds) and all 62 under `/portfolio/` (45.4 seconds). Desktop and mobile home, Posts, JWT, and Survey views received visual review; the table-of-contents wrapping correction was verified.
 
-In that earlier verification, root and `/portfolio/` development-server privacy checks passed: the then-published portrait was served as a sanitized 413 × 531 JPEG, while aliases for the unused `half_body.jpg` and private zone files returned 403. Desktop and mobile pages, both articles, the portrait, and the classifier interface received visual review. The current hero uses the original transparent PNG described above; the JPEG sanitizer has been removed. Actual browser chrome zoom, text enlargement, and manual screen-reader review remain unverified. Automated axe and keyboard checks do not establish complete accessibility conformance.
+Development smoke checks passed at both root and `/portfolio/`: all five routes loaded in directory and explicit `index.html` forms, all five remained readable without JavaScript, JWT interaction worked, legacy migration documents pointed to their posts, and the approved PNG retained its exact bytes. Private-path and synthetic unapproved-public-file probes returned 403 through the tested aliases. A development-only doubled asset prefix was found and corrected; the prefixed development pages then loaded and hydrated successfully. The lasting development regression test passed separately (1/1, 2.1 seconds), covering real JavaScript, SVG, and RSS responses at root and prefix paths. The default portable build was restored; lint, TypeScript, build, the 16-output audit, and whitespace checking passed again. The combined suite passed all 63 tests against the portable build (39.7 seconds). A subsequent presentation-only change made the inTalent live link visible on its project card. All 17 homepage tests passed afterward (19.5 seconds), including an assertion that the link is visible while its case study is closed. Final lint, TypeScript, default portable build, 16-output distribution audit, and whitespace checks passed again.
 
-## Deployment verification
+No commit, push, deployment, or employer-repository modification was performed during this migration. Actual browser-chrome zoom, text enlargement, and manual screen-reader behavior remain unverified; automated accessibility checks do not establish complete conformance. Crawlability and structured data do not guarantee indexing, search ranking, or AI citation.
 
-The GitHub Pages workflow and production metadata are prepared for `https://taushifreza.com.np/`. Read-only checks on 26 October 2026 found the four GitHub Pages apex A records and an HTTPS 200 response from GitHub; `www` did not resolve. These checks establish an existing endpoint, not publication of the new React build. Authenticated Pages settings, domain verification, the `www` record, workflow publication, and live smoke checks must be confirmed during rollout. See [deployment instructions](deployment.md).
+The previous 54-test runs from 26 October applied to the earlier portfolio and are superseded for this migration by the results above.
 
-On 26 October 2026, deployment preparation passed lint, TypeScript checking, the root production build (`--base=/`), the 27-output distribution audit, and whitespace checking. Playwright passed all 54 tests at the root and all 54 under `/portfolio/` (approximately 1.3 minutes per run); the nested build also passed its distribution audit. The default portable build was restored afterward and passed the 27-output audit. The Pages workflow YAML parsed successfully and independent code review found no blockers. These are local checks: no GitHub Actions run or new deployment was performed, and authenticated GitHub/Cloudflare settings remain to be confirmed. The existing real-model evaluation was not rerun for this deployment change.
+Read-only domain checks on 26 October 2026 found the four GitHub Pages apex A records and an HTTPS 200 response, while `www` did not resolve. That established an existing endpoint, not deployment of this new build. See [deployment instructions](deployment.md); no authenticated setting or publication is implied by local checks.

@@ -1,141 +1,138 @@
 # Portfolio content and evidence
 
-This document is the content source of truth for the portfolio. Public copy should remain concise, specific, and limited to claims supported by the CV or project context. Keep this editorial guidance private; do not publish the source context files or CV.
+This editorial evidence register is the content source of truth. It is excluded from the website build, but remains repository documentation and is publicly visible if committed to this public repository. Public content uses the owner's supplied context/CV, reviewed source, and explicit clarifications; no employer source, secrets, customer records, or private contact information may be copied into the website.
 
-## Positioning
+## Positioning and permissions
 
-**Name:** Taushif Reza  
-**Role:** Software Engineer, building toward AI engineering  
-**Short introduction:** Backend-focused software engineer building reliable APIs and real-time systems, with experience across Django, Go, and connected hardware. Interested in applying that systems foundation to AI engineering.
+Taushif Reza is a backend-focused Software Engineer based in Nepal, with Python/Django as his strongest foundation and an explicit learning direction toward AI engineering. Go demonstrates tooling experience; C#/.NET is represented through a course-based learning project. React/TypeScript describe this portfolio rather than an unsupported professional frontend specialization.
 
-The AI direction is an aspiration, not a claim of AI/ML specialization. Use “Software Engineer” rather than senior, architect, or another unsupported level.
+On 27 October 2026, the owner confirmed backend ownership for inTalent, Survey, Bus Attendance, and Attendance. This supports first-person backend contribution language, not sole ownership of every platform component. He approved original explanatory examples instead of publishing proprietary source excerpts, and identified Mango as course-based learning.
 
-The owner approved the supplied transparent `public/bg_remove.png` cutout as the sole public portrait, replacing the introduction's large orbit illustration. Use the original PNG without further image editing, with the name Taushif Reza and role Software Engineer. The Approach section retains its text identity and biography without a second photo. The original `pp.jpg`, `half_body.jpg`, other supplied photos, and download sidecars remain local and unpublished.
+The original transparent `public/bg_remove.png` is the sole approved public portrait. Keep its bytes/alpha unchanged. Other original photos and download sidecars remain local and unpublished.
 
-## Public sections
+## Featured project order
 
-1. **Introduction:** Name, role, concise positioning, and GitHub/LinkedIn links.
-2. **Selected work:** Bus Attendance System, Dynamic QR Ticketing System, inTalent, and Go PDF generator. Each entry distinguishes project context, contribution, evidence, and status where relevant.
-3. **Writing:** Dedicated PDF memory case study and JWT/JWKS educational article. A compact public-repository archive follows selected work.
-4. **Lab:** Newly built incident-classifier portfolio experiment linked from the learning aside. This is current learning work, not a historical employment project or evidence of AI specialization.
-5. **How I work:** Transactional correctness, clear service boundaries, access control, and root-cause debugging. Frame these as recurring engineering interests/practices, not quantified outcomes.
-6. **Experience and education:** Current CV-confirmed roles and degree.
-7. **Expertise:** Evidence-based technologies only; avoid proficiency scales.
-8. **Contact:** Public GitHub and LinkedIn links only.
+| Order | Project | Supported public scope | Limits |
+| --- | --- | --- | --- |
+| 1 | inTalent | Backend implementation across identity, certification, enrollment, imports/reports, job applications, resume snapshots, and notification processing. Public platform: `https://intalentnepal.com`. | A live platform does not prove every inspected change is deployed. AI-interview and Networking are not functioning in the inspected source's status notes; omit them as shipped features. |
+| 2 | Survey System | Internal Django/DRF survey workflows, monthly rounds, question snapshots, invitation processing, project grants, response collection, and historical reporting. | Keep its deployment URL private. This checkout does not establish explicit timed token expiry. |
+| 3 | Bus Attendance | Django backend with MQTT/MessagePack ingestion, RFID trip-linked attendance, routes/stops, historical locations, and school/bus/parent WebSocket distribution. | No source-confirmed five-second delivery cadence; do not claim hardware authorship or security guarantees from this audit. |
+| 4 | Attendance System | Daily clock/break lifecycle, corrections, travel requests, departmental access, verification/approval, analytics, and spreadsheet exports. | Distinct from Bus Attendance. Source now supports implemented work; the old context-only “planned rewrite” label is obsolete for this inspected backend. No claim of universal race-proof behavior. |
 
-## Experience and education
+Follow these with concise QR Ticketing and Go Print-Sheet Generator entries. Mango is a separate learning entry. Banking App and go-social remain the compact public repository archive.
 
-- **Software Engineer, ING Skill Academy** — February 2024–present.
-- **Backend Developer, Prince Lab** — September 2023–January 2024.
-- **BSc (Hons) Computing, Islington College / London Metropolitan University** — February 2022–May 2024.
+## Source evidence locators
 
-Use “ING Skill Academy” exactly as in the CV. Do not conflate it with “ING Skill Museum” appearing in project context. No employment relationship to inTalent is established in the source material.
-
-## Project cards and case-study guidance
-
-### Bus Attendance System
-
-CV-supported work at ING Skill Academy. Describe the system as hardware-integrated attendance and live location tracking, involving ESP32, RFID, GPS, GSM, a backend, and a frontend. The CV describes WebSocket updates every five seconds and automated attendance logging. Present the stated architecture as Hardware → Communication → Backend → Frontend. Do not equate this system with the separately discussed InOut attendance rewrite; that rewrite is planned and its implementation status is unknown.
-
-### Dynamic QR Ticketing System
-
-CV-supported work at ING Skill Academy. Describe dynamic QR ticketing with real-time validation and API design. A separate project context describes a Django event-ticketing platform with manual payment verification, multiple tickets per purchase, QR tickets, and admin bulk actions; present those details only as contextual project notes unless the connection and personal contribution are clear in the UI copy.
+All paths below are local editorial locators, never source download links. Their inclusion does not publish or grant access to the corresponding repositories. No inspected employer repository was modified or executed during research. Test files establish that testing work exists, not that the tests passed during this audit.
 
 ### inTalent
 
-Context describes a certification-based hiring and applicant-tracking platform using Django REST services. Safe summary: “Contributed to backend design and implementation discussions for a hiring and certification platform, including service boundaries, authentication, and application workflows.” The contexts vary on authorship and status; label individual features as discussed, designed, or implemented only when the source explicitly supports that status. Do not present the proposed AI Interview feature as shipped. Do not attribute colleague-authored changes to Taushif.
+Root: `/home/taushif/work/smarc/intalent`.
 
-### Go PDF generator
+- `auth/account/services/jwt_token_service.py`: RS256 issuance, refresh rotation, account eligibility and current identity claims.
+- `auth/account/views/public.py`: public-key/JWKS document.
+- `backend/Job/myproject/authentication.py`: consumer signature, issuer, audience, expiry, and token-type verification.
+- `auth/core/views.py` and `auth/config/utils/authentication.py`: distinct service identity and service scopes.
+- `backend/Certification/cert_enrollments/enrollment/services/enrollment_service.py`: transactional enrollment and row locking.
+- `backend/Certification/cert_enrollments/submissions/services/submission_service.py`: assessment submission/progress coordination.
+- `backend/Job/job_applications/services/application_service.py` and `resume_snapshot_service.py`: application records and application-owned resumes.
+- `backend/notification/src/consumer.py`: Redis LIST queue, not Redis Pub/Sub.
 
-Context describes a Go tool for large-batch ticket-imposition PDFs and two production out-of-memory failures addressed by creating an Fpdf instance per sheet and merging bounded groups recursively with pdfcpu. Safe case study: explain the memory issue and these design changes; state that the failures were reported as solved, with no public metrics available. Do not invent throughput, batch size, memory savings, or uptime.
+Auth and backend histories include substantial owner-attributed implementation commits. The Certification working tree contained a large uncommitted refactor; its source paths are implementation evidence, not a release manifest. Do not claim immediate access-token revocation, automatic key rotation, OAuth/OIDC compliance, or complete production rollout without separate evidence.
 
-### Writing, lab, and public repository additions
+### Survey
 
-- `/writing/pdf-memory/`: document two production OOM failures, per-sheet Fpdf instantiation, and bounded recursive pdfcpu merging. Diagnostic chronology, exact earlier pipeline, measurements, and original code are unavailable. Resource diagrams are conceptual; pseudocode is explanatory. Do not infer profiler use or measured improvements.
-- `/writing/jwt-jwks/`: educational asymmetric-signing flow, separate from verification of any deployment. Static synthetic fixtures illustrate valid, expired, wrong-audience, and permission-denied requests. Issuance → signature verification → issuer/audience/expiration validation → authorization; failed authentication does not reach authorization. No cryptography executes. Reference RFC 7519, 7517, and 8725; distinguish decoding from verification and signing from confidentiality.
-- The newly built lab uses a pretrained NLI model for zero-shot classification, not an incident-trained or newly trained model. The reviewed upstream `cross-encoder/nli-deberta-v3-xsmall` license is Apache 2.0; the pinned ONNX artifact is `Xenova/nli-deberta-v3-xsmall`. Runtime/model versions, provenance, downloads, evaluation, and limitations belong in `ai-lab.md` and the lab UI.
-- Public source review on 26 October 2026 supports `https://github.com/TaushifReza/banking-app` as an account/authentication/profile Django REST project, including email OTP and JWT cookies. Its name does not establish a completed banking or transaction system.
-- The reviewed public `https://github.com/TaushifReza/go-social` supports registration, posts, follows, PostgreSQL, Redis profile caching, and HS256 JWTs. Do not describe it as using the article's RSA/JWKS design or as production-ready.
-- EBookStore returned 404 and is omitted. Template Studio has no supplied public artifacts and is omitted from the archive.
-- Typed optional image/video/link evidence is supported in disclosures. Add entries only for real public artifacts; no empty panels or mock screenshots. Image/video/caption files must use reviewed public-folder paths such as `artifacts/bus-dashboard.webp`, without a hosting prefix or Vite-imported absolute URL. External HTTPS is only for click-through links. Before adding a video, supply a transcript and, when it contains audio, reviewed caption tracks through the captions field; verify accessibility and loading behavior against the actual artifact.
+Root: `/home/taushif/work/smarc/survey/backend`.
 
-### Additional evidence-led topics
+- `apps/survey_cycles/models.py`: project/client/month uniqueness and stored question snapshots.
+- `apps/survey_cycles/services.py`: locked/idempotent round creation, snapshot-based public rendering and submission.
+- `apps/survey_cycles/invitations.py`: delivery claims, eligibility rechecks, and receipt state.
+- `apps/projects/permissions.py`: viewer/editor grants and administrative bypass.
+- `apps/dashboards/services.py` and `cache.py`: historical reporting, pooled calculations, and best-effort caching.
 
-The contexts also record work/discussion involving enrollment race handling with row locks and atomic transactions, exam-integrity review, framework-free Go layering, and inTalent service authentication. Use only where useful and clearly distinguish design/review from verified implementation. Avoid the AI Interview project and VAPT mitigation as shipped case studies unless independent implementation evidence is established.
+Snapshot wording should describe preserved question content used by a generated survey, not promise universal database immutability. Link access is lifecycle/active-state gated; timed expiry was not found.
 
-## Skills and evidence
+### Attendance
 
-Good primary skills for the page: Python, Django/DRF, REST APIs, PostgreSQL, Redis, Docker, and Go. React, FastAPI, WebSockets, JWT/RBAC, Celery, and hardware integration may appear in relevant project details. Treat Go as demonstrated in project context but avoid implying equal depth to Django/Python. Omit tools that were only proposed, mentioned, or attributed to colleagues.
+Root: `/home/taushif/work/smarc/attendance-backend`.
 
-## Claims to exclude
+- `attendence/models.py` and `services/interns_attendance_service.py`: daily uniqueness, clock/break/clock-out lifecycle, and transactional clock-in.
+- `attendance_requests/services/attendance_request_service.py`: correction/travel requests.
+- `attendance_requests/services/attendance_verification_service.py`: staged verification/approval.
+- `account/permissions.py`: departmental access.
+- `attendence/services/export_services.py`, `analytics_service.py`, and `calculation_service.py`: exports, analytics, and calculations.
 
-- 99.9% uptime, cost reduction, user growth, or performance improvements: not independently supported with evidence.
-- “AI interview service shipped” and any claim that AI Interview is production work.
-- Senior/architect titles, team leadership, or unverified ownership of inTalent features.
-- “InOut rewrite shipped” or merging InOut with the CV Bus Attendance System.
-- Private reviews, colleagues’ names/contributions, internal infrastructure addresses, raw CV/context content, email, phone, résumé download, or contact form.
-- AWS Academy coursework described as a professional certification; if certifications are ever listed, label these accurately as course completions.
+Git history supports the owner's implementation. The inspected app-level test modules had no meaningful cases; do not claim a tested production reliability level.
 
-## Public links
+### Bus Attendance and QR Ticketing
 
-- GitHub: `https://github.com/TaushifReza`
-- LinkedIn: `https://www.linkedin.com/in/taushif-reza`
+Bus root: `/mnt/d/Work/ING Skill Museum/BusAttendance/Backend`.
 
-## Private evidence register and inventory
+- `transportation/mqtt_client.py`: MessagePack ingestion, attendance processing, and audience-specific broadcasts.
+- `transportation/consumers.py`: school/bus/parent subscriptions.
+- `routes/models.py`: routes/stops/assignments.
 
-This register is editorial documentation, excluded from the application build. Source locators refer to the supplied local context files and the one-page CV, not independently verified project repositories. **Supported** means present in a supplied source; **inference** means a conservative editorial interpretation; **missing** identifies evidence still needed. A context summary can conflict with another summary, so presence in a context is not proof of personal authorship or shipping status.
+The CV's five-second statement is not corroborated by backend scheduling. Nearby demo sketches also do not establish that interval. Keep timing unquantified. The inspected source does not establish a verified end-to-end security guarantee; avoid publishing security assurances unsupported by independent validation.
 
-Source keys: **C** = `claude_context.md`, section D numbered inventory (lines 50–108); **G** = `gpt_context.md`, section D named project headings (lines 373–715); **CV** = `MOHAMMAD TAUSHIF REZA.CV.pdf`, page 1. `gemini_context.md` section D explicitly has no project evidence and supplies no additional project entries. Exact locators below let a reviewer find the source without copying raw context into public assets.
+QR source: the `ticket_system/backend` project beneath the same Windows work tree. `core/views.py` supports numbered QR ticket generation, ZIP output, lookup validation, and used-ticket state. It is implemented with Django views; do not describe it as necessarily DRF, rotating QR codes, or race-proof redemption.
 
-| Project / grouping | Locator | Decision | Supported; inference or missing evidence |
-| --- | --- | --- | --- |
-| Bus Attendance System | CV, Work Experience / ING Skill Academy | Feature | Four-layer hardware system, ESP32/RFID/GPS/GSM, five-second WebSocket updates, attendance/location. Public diagram is a simplified schematic; deployment topology and independent metrics missing. |
-| Dynamic QR Ticketing System | CV, Work Experience / ING Skill Academy | Feature | Real-time validation and API design. Connection to C's event-ticketing or G's food/drink service missing; do not merge them. |
-| inTalent platform | C D.1; G `inTalent Platform` (375) | Feature, qualified | Service/auth/application discussions supported. C reports implemented features; G warns authorship and deployment unverified. Personal ownership of each feature missing; show discussions/design contribution only. |
-| Go print-file-generator | C D.8; F.1 (124–129) | Feature | Two OOM failures reported solved by per-sheet Fpdf and bounded recursive pdfcpu merges. No throughput/memory measurements; no independent production verification. |
-| inTalent AI Interview Service | C D.2; G `AI Interview Service` (555) | Omit | C says built, G says proposed/not implemented. Conflicting implementation status and attribution; cannot publish as shipped. |
-| inTalent certification/enrollment backend | C D.3; G `inTalent Platform` | Reserve | Eligibility/issuance, enrollment modes and race handling discussed. Individual authorship and implementation verification missing; eligible as a qualified engineering topic only. |
-| inTalent exam integrity | C D.4; G F `Certification exam automation/VAPT` (752) | Reserve | Review/security concerns supported; mitigation completion and ownership unverified. |
-| ING Skill Museum Global Survey | C D.5 | Reserve | Django/JWT/Celery/email/token-flow context. Employer relationship, personal scope and rollout missing. Do not rename employer to Skill Museum. |
-| Template Studio | C D.6 | Reserve | Django/React template canvas and bulk generation described; individual authorship and public demo missing. |
-| cec-print | C D.7 | Reserve | Pillow certificate tool described. Authorship, status and public repository missing. Keep distinct from Go PDF tool. |
-| go-social | C D.9; public repository reviewed 26 Oct 2026 | Archive | Current public source supports Go social API registration/posts/follows, PostgreSQL and Redis profile caching; HS256 JWTs. No production-readiness or RSA/JWKS claim. |
-| Go AI Interview | C D.10 | Omit | Go/Gin migration described; overlap with Go REST API/go-social and shipping status unresolved. |
-| Go REST API | C D.11 | Reserve | Go API stack described; possible overlap with D.9/D.10 explicitly uncertain. No separate ownership/rollout proof. |
-| Admission Pulse | C D.12; G `Admission Pulse` (411) | Reserve | FastAPI/async SQLAlchemy/JWT/reporting work discussed. Intended users are inferred; final debugging outcome, usage and deployment missing. |
-| InOut / Intern Attendance rewrite | C D.13; G `Intern Attendance System` (483) | Reserve, planned | Existing attendance app and planned tenant-aware rewrite. Alias/grouping is a conservative editorial inference; original project identity and personal scope need confirmation. Distinct from CV bus system. |
-| Multi-tenant SaaS consolidation / organizational suite | C D.14; G `Multi-tenant Organizational SaaS` (501) | Reserve, design | Tenant isolation and entitlements discussed; C says partly built, G says completed SaaS unverified. Their equivalence is inferred, not established. |
-| Cookiecutter multi-stack template | C D.15 | Reserve | Django reference template/CLI described. Ownership, public artifact and reuse outcomes missing. |
-| Django event ticketing platform | C D.16 | Reserve | Manual payment verification, multi-ticket purchase and QR/admin workflows described. Link to CV QR system and exact personal contribution missing. |
-| Points/rewards / College Points / FYI points | C D.17; G `College Points / FYI student points` (429) | Reserve | Ledger/transaction discussion supported; grouping is inferred, some implementation belongs to colleagues. Personal authorship missing. |
-| RBAC system | C D.18; G `POC System` (393) for related authorization concepts only | Reserve | DRF/React permission logic described in C. POC equivalence is not established; keep separate. |
-| NFRS-9 Vision Report UI | C D.19 | Reserve | FastAPI/OCR/Docker context. User contribution and outcome missing; no shipped claim. |
-| Django polling fix | C D.20 | Reserve | Constraint/deduplication fix reported. Personal authorship and verification missing. |
-| World Cup 2026 prediction system | C D.21 | Reserve | Existing Django app, result/tiebreaker changes described. Authorship and deployed outcome missing. |
-| Self-hosted Vaultwarden | C D.22 | Omit | Personal infrastructure context, not necessary public evidence; avoid infrastructure details. |
-| POC System | G `POC System` (393) | Reserve | Django domain/RBAC design under development. Commissioning, personal role, rollout missing; separate from C RBAC entry. |
-| Spin the Wheel | G `Spin the Wheel` (447) | Reserve | Atomic transaction discussion supported; related commits attributed elsewhere. Authorship and stress-test evidence missing. |
-| FYI Plus2 | G `FYI Plus2` (465) | Reserve | DRF/schema/error debugging supported; final cause/fix and personal contribution missing. |
-| QR Food & Drink Ticket API | G `QR Food & Drink Ticket API` (519) | Reserve | Endpoint/authentication discussion supported; personal authorship, deployment and relationship to CV ticketing missing. |
-| Notification Service | C D.1; G `Notification Service` (537) | Reserve within inTalent | Async messaging described; queue mechanism differs between summaries. Delivery metrics, exact implementation and ownership missing. |
-| RustFS / Cloudflare / LXC storage stack | G `RustFS / Cloudflare / LXC Storage Stack` (573) | Omit | Troubleshooting context supported; final access-policy outcome unconfirmed and infrastructure privacy requires omission. |
-| Reusable Proxmox LXC template | G `Reusable Proxmox LXC Developer Template` (591) | Omit | Attempted template workflow, conversion outcome unconfirmed. |
-| Alumni Graduation Invitation System | G `Alumni Graduation Invitation System` (609) | Omit | Colleague work; personal contribution missing. |
-| inNepal | G `inNepal` (627) | Omit | Colleague work; personal contribution missing. |
-| Cyber Centric Game | G `Cyber Centric Game` (645) | Omit | Colleague work; personal contribution missing. |
-| Hack Arena | G `Hack Arena` (663) | Omit | Colleague work; personal contribution missing. |
-| inTalent Landing Page | G `inTalent Landing Page` (681) | Omit | Assistant-proposed artifact; user authorship and outcome unconfirmed. |
-| AI/ML learning experiments | G `AI/ML Learning Experiments` (699) | Omit as projects | Learning proposals only; completed experiments missing. AI direction may appear as aspiration. |
-| Banking APP | CV, Projects; public repository reviewed 26 Oct 2026 | Archive, narrow scope | Public source supports Django REST account/authentication/profile workflows, email OTP, and JWT cookies. No completed banking, transactions, adoption, or regulated-service claim. |
-| E-Book Store | CV, Projects; repository check 26 Oct 2026 | Omit | CV reports ASP.NET features, but the linked public repository returned 404. No public artifact is supplied. |
+### Go Print-Sheet Generator
 
-### Exact CV credentials, dates, and additional links
+Root: `/home/taushif/work/smarc/helper_script_projects/go-print-file-generator`.
 
-- Software Engineer, **ING Skill Academy**, Nepal: **Feb 24–Present** (display normalized to February 2024–present).
-- Backend Developer, **Prince Lab**, Nepal: **Sept 23–Jan 24** (September 2023–January 2024).
-- **BSc (Hons) Computing**, **Islington College Kathmandu (London Metropolitan University)**: **Feb 2022–May 2024**.
-- **AWS Academy Graduate - AWS Academy Cloud Foundations**: **Sep 19, 2022**; CV annotation URL: `https://www.credly.com/go/JFOz4SiG`.
-- **AWS Academy Graduate - AWS Academy Machine Learning Foundations**: **Nov 16, 2022**; CV annotation URL: `https://www.credly.com/go/HPWfg0vu`.
+- `internal/pdfbuilder/pdfbuilder.go`: current fresh Fpdf per sheet, temporary single-sheet files, direct chunk merge.
+- `internal/worker/pool.go`: concurrency and ordered collection.
+- `internal/chunker/chunker.go`: contiguous chunks whose size grows with the job.
+- `internal/merger/merger.go`: direct final `pdfcpu` merge.
+- `cmd/ticket-imposition/main.go`: preview, orchestration, and temporary-directory cleanup.
+- `internal/autogrid/autogrid.go`: orientation-aware grid calculation.
 
-The AWS entries are course completions, not professional AWS certifications; they are not required public page content. Banking APP's CV-linked `https://github.com/TaushifReza/banking-app` has now been reviewed and is included only with the narrow source-supported scope above. E-Book Store's `https://github.com/TaushifReza/eBookStore` returned 404 and is omitted. Credential URLs were extracted from CV annotations but have not been verified for public inclusion. Public GitHub profile retrieval returned 200; LinkedIn returned 999 (bot/access restriction), so automated retrieval cannot establish normal interactive availability.
+History confirms a change from one renderer per chunk (`0ce6a05`) to one renderer per sheet (`3c40dc6`). The current source and inspected history do not substantiate bounded recursive merges, constant memory, or streaming throughout. This corrects the earlier context-derived narrative. The reported production OOM incidents may be described as owner-reported context, without inventing measurements or asserting an unverified second fix. The sibling Python/ReportLab generator is distinct.
 
+### Mango
+
+Root: `/mnt/d/C#Project/Microservices/Mango`.
+
+Course-based .NET 8 learning project: ASP.NET Identity, HS256 JWT, EF Core/SQL Server, product/coupon/cart/order services, Stripe handling in OrderAPI, Azure Service Bus publishing, and a rewards consumer. Do not infer an Ocelot gateway or standalone payment service from README claims unsupported by source. Email code inspected stores logs; actual delivery was not established. Do not expose or link private source/configuration containing credentials.
+
+## Posts
+
+Three source-backed drafts:
+
+1. **Verifying JWTs across microservices with JWKS** — general trust boundaries with Django examples from implemented inTalent services. Separate access, refresh, and service tokens; key discovery, signature/claims validation, then authorization. Synthetic interactive scenarios execute no cryptography.
+2. **Why I use a fresh PDF renderer for every sheet** — verified renderer lifetime change, ordered workers, intermediate files, I/O tradeoffs, and remaining merge limits.
+3. **Why I freeze survey questions before collecting responses** — template changes, stored question content, survey-round boundaries, and historical reporting tradeoffs.
+
+Use direct first-person prose, independently written examples, and official technical references. Do not invent debugging memories or claim independent human authorship. Unknown first-publication dates stay omitted; actual visible dates, feed dates, and structured data must agree when added.
+
+## Skills
+
+- Backend: Python, Django/DRF, API design, authentication, transactional workflows.
+- Data/background processing: PostgreSQL, Redis, Celery; MQTT/Channels in relevant project context.
+- Systems: Docker, Linux, NGINX.
+- Other tooling/learning: Go tooling; C#, ASP.NET Core, EF Core, SQL Server, Azure Service Bus through Mango.
+- Portfolio frontend: React, TypeScript, Vite.
+
+Do not turn dependency presence into an expertise claim or give arbitrary skill percentages.
+
+## Experience and education
+
+Owner-confirmed CV history remains:
+
+- Software Engineer, ING Skill Academy — February 2024–present.
+- Backend Developer, Prince Lab — September 2023–January 2024.
+- BSc (Hons) Computing, Islington College / London Metropolitan University — February 2022–May 2024.
+
+Keep the employer name from the CV; do not silently equate ING Skill Academy and ING Skill Museum. AWS Academy completions are coursework, not professional certifications, and remain omitted from the public page.
+
+## Public destinations
+
+Owner-approved profiles: GitHub `https://github.com/TaushifReza`, LinkedIn `https://www.linkedin.com/in/taushif-reza`, X `https://x.com/TaushifR786`, Bluesky `https://bsky.app/profile/taushifreza.bsky.social`, Instagram `https://www.instagram.com/taushifreza`.
+
+The supplied inTalent live URL returned HTML during research; individual feature rollout was not established through that response. Social platforms may restrict automated retrieval. Profile links are owner-supplied, not claims that every automated availability check succeeded.
+
+Previously reviewed public repositories: `https://github.com/TaushifReza/banking-app` supports account/auth/profile workflows, not a completed banking transaction system; `https://github.com/TaushifReza/go-social` supports its social API scope, not the article's RSA/JWKS design or production readiness.
+
+## Publication exclusions
+
+No private email/phone, résumé download, raw context/CV, employer source paths, customer/resume data, internal endpoints, credentials, invented metrics, testimonials, or unverified live demos. The removed incident-classifier lab is not public portfolio content. Removing the portfolio lab does not erase the separate AI learning aspiration.
